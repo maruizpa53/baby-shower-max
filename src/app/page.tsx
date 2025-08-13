@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { 
   collection, 
   doc, 
@@ -642,7 +642,7 @@ export default function BabyShowerGiftSelector() {
   };
 
   // Inicializar Firebase si es la primera vez
-  const initializeFirestore = async () => {
+  const initializeFirestore = useCallback(async () => {
     try {
       const giftsCollection = collection(db, 'gifts');
       const snapshot = await getDocs(giftsCollection);
@@ -671,7 +671,7 @@ export default function BabyShowerGiftSelector() {
         console.log(`📊 Total de regalos inicializados: ${initialGifts.length}`);
         
         // Verificar categorías
-        const categories = [...new Set(initialGifts.map(gift => gift.category))];
+        const categories = Array.from(new Set(initialGifts.map(gift => gift.category)));
         console.log('🏷️ Categorías inicializadas:', categories);
         categories.forEach(cat => {
           const count = initialGifts.filter(gift => gift.category === cat).length;
@@ -682,7 +682,7 @@ export default function BabyShowerGiftSelector() {
         
         // Debug categorías existentes
         const existingGifts = snapshot.docs.map(doc => doc.data());
-        const existingCategories = [...new Set(existingGifts.map(gift => gift.category))];
+        const existingCategories = Array.from(new Set(existingGifts.map(gift => gift.category)));
         console.log('🏷️ Categorías existentes:', existingCategories);
         
         // Verificar si hay regalos sin categoría o con categorías incorrectas
@@ -695,7 +695,7 @@ export default function BabyShowerGiftSelector() {
     } catch (error) {
       console.error('❌ Error inicializando Firestore:', error);
     }
-  };
+  }, []);
 
   // Escuchar cambios en tiempo real
   useEffect(() => {
@@ -721,7 +721,7 @@ export default function BabyShowerGiftSelector() {
         console.log(`📊 Datos procesados: ${giftsData.length} regalos`);
         
         // Verificar todas las categorías
-        const categories = [...new Set(giftsData.map(gift => gift.category))];
+        const categories = Array.from(new Set(giftsData.map(gift => gift.category)));
         console.log('🏷️ Categorías encontradas:', categories);
         console.log('📋 Resumen detallado por categoría:');
         categories.forEach(cat => {
@@ -762,7 +762,7 @@ export default function BabyShowerGiftSelector() {
       console.log('🔌 Desconectando tiempo real...');
       unsubscribe();
     };
-  }, []);
+  }, [initializeFirestore]);
 
   const validatePhone = (phone: string): boolean => {
     const phoneRegex = /^3[0-9]{9}$/;
@@ -932,7 +932,7 @@ export default function BabyShowerGiftSelector() {
     console.log(`🔍 Filtrados: ${filtered.length} de ${gifts.length} regalos`);
     
     // Debug de categorías en filtrados
-    const filteredCategories = [...new Set(filtered.map(gift => gift.category))];
+    const filteredCategories = Array.from(new Set(filtered.map(gift => gift.category)));
     console.log('🏷️ Categorías en filtrados:', filteredCategories);
     
     return filtered;
@@ -1136,7 +1136,7 @@ export default function BabyShowerGiftSelector() {
             </p>
             {gifts.length !== 42 && (
               <p className="text-orange-600 font-semibold mt-1">
-                ⚠️ Se esperan 42 regalos, pero solo hay {gifts.length}. Usa el botón "Reinicializar" si es necesario.
+                ⚠️ Se esperan 42 regalos, pero solo hay {gifts.length}. Usa el botón &ldquo;Reinicializar&rdquo; si es necesario.
               </p>
             )}
           </div>
@@ -1599,10 +1599,10 @@ export default function BabyShowerGiftSelector() {
                       {phoneError}
                     </p>
                   )}
-                  <p className="text-green-600 text-xs sm:text-sm mt-2 flex items-center gap-2">
-                    <Phone className="w-3 sm:w-4 h-3 sm:h-4" />
-                    Formato: número colombiano de 10 dígitos
-                  </p>
+              <p className="text-green-600 text-xs sm:text-sm mt-2 flex items-center gap-2">
+                <Phone className="w-3 sm:w-4 h-3 sm:h-4" />
+                Formato: número colombiano de 10 dígitos
+              </p>
                 </div>
               </div>
 
