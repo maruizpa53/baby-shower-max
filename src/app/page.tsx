@@ -15,6 +15,7 @@ import {
   CheckCircle,
   Phone,
   User,
+  Info,
 } from "lucide-react";
 
 interface Gift {
@@ -31,575 +32,565 @@ interface Gift {
 
 export default function BabyShowerGiftSelector() {
   const [gifts, setGifts] = useState<Gift[]>([
-    // Recién Nacido (0-3 meses) - Pañales RN
+    // ROPA Y ACCESORIOS
     {
       id: 1,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Bodies RN + Pañales RN",
-      description:
-        "Bodies de algodón orgánico talla RN (6 pack) + Paquete pañales RN",
-      brands: "Gerber + Huggies RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Bodies (0-3 meses) + Pañales Etapa 0",
+      description: "Bodies de algodón orgánico con broches (6 pack) + Pañales Winny Etapa 0 (hasta 4.5kg)",
+      brands: "Arrurrú + Winny Etapa 0",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 2,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Pijamas RN + Pañales RN",
-      description:
-        "Pijamas enterizas con cremallera talla RN + Paquete pañales RN",
-      brands: "Carter's + Pampers RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Esqueletos (0-3 meses) + Pañales Etapa 0",
+      description: "Esqueletos sin mangas talla RN (4 pack) + Pañales Winny Etapa 0 (hasta 4.5kg)",
+      brands: "Carter's + Winny Etapa 0",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 3,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Manta térmica + Pañales RN",
-      description: "Manta ligera para recién nacido + Paquete pañales RN",
-      brands: "Chicco + Winny RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Pijamas (3-6 meses) + Pañales Etapa 1",
+      description: "Pijamas enterizas con cremallera talla P + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Arrurrú + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 4,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Kit aseo básico + Pañales RN",
-      description:
-        "Crema anti-rozaduras + toallitas húmedas + Paquete pañales RN",
-      brands: "Johnson's Baby + Babysec RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Bodies (6-9 meses) + Pañales Etapa 2",
+      description: "Bodies manga larga talla M (6 pack) + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Carter's + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 5,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Accesorios RN + Pañales RN",
-      description: "Gorritos, medias y manoplas + Paquete pañales RN",
-      brands: "Baby Colors + Huggies RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Pijamas (9-12 meses) + Pañales Etapa 3",
+      description: "Pijamas dos piezas talla G + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "Arrurrú + Winny Etapa 3",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 6,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Toalla con capucha + Pañales RN",
-      description:
-        "Toalla de microfibra suave con capucha + Paquete pañales RN",
-      brands: "Disney Baby + Pampers RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Conjunto (12-18 meses) + Pañales Etapa 4",
+      description: "Conjunto camiseta y pantalón talla 12M + Pañales Winny Etapa 4 (10-16kg)",
+      brands: "Carter's + Winny Etapa 4",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 7,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Kit hospital + Pañales RN",
-      description:
-        "Ajuar para hospital (3 bodies + 2 pijamas) + Paquete pañales RN",
-      brands: "Gerber + Winny RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Calcetines antideslizantes + Pañales Etapa 1",
+      description: "Set de calcetines con suela antideslizante + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Arrurrú + Winny Etapa 1",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 8,
-      category: "👶 Recién Nacido (0-3 meses)",
-      gift: "Manta de algodón + Pañales RN",
-      description: "Manta de algodón orgánico + Paquete pañales RN",
-      brands: "Carter's + Babysec RN",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Zapatos primeros pasos + Pañales Etapa 2",
+      description: "Zapatos blandos para gatear talla 2-3 + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Bebebé + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
-
-    // Primeros Meses (3-6 meses) - Pañales P
     {
       id: 9,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Bodies P + Pañales P",
-      description:
-        "Bodies de algodón orgánico talla P (6 pack) + Paquete pañales P",
-      brands: "Gerber + Huggies P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Zapatos para caminar + Pañales Etapa 3",
+      description: "Zapatos con suela flexible talla 4-5 + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "Bebebé + Winny Etapa 3",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 10,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Pijamas P + Pañales P",
-      description:
-        "Pijamas enterizas con cremallera talla P + Paquete pañales P",
-      brands: "Carter's + Pampers P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Baberos impermeables + Pañales Etapa 1",
+      description: "Baberos de silicona con bolsillo (4 pack) + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Gerber + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 11,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Toalla con capucha + Pañales P",
-      description: "Toalla de microfibra suave con capucha + Paquete pañales P",
-      brands: "Chicco + Winny P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Fajeros y gorritos + Pañales Etapa 0",
+      description: "Set de fajeros y gorritos para recién nacido + Pañales Winny Etapa 0 (hasta 4.5kg)",
+      brands: "Baby Fresh + Winny Etapa 0",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
+
+    // HIGIENE Y CUIDADO
     {
       id: 12,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Baberos impermeables + Pañales P",
-      description: "Set de baberos de silicona + Paquete pañales P",
-      brands: "Munchkin + Babysec P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit higiene completo + Pañales Etapa 0",
+      description: "Kit con lima, cortaúñas, cepillo, peine, termómetro + Pañales Winny Etapa 0 (hasta 4.5kg)",
+      brands: "Safety 1st + Winny Etapa 0",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 13,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Mordederas + Pañales P",
-      description:
-        "Mordederas de silicona grado alimenticio + Paquete pañales P",
-      brands: "Philips Avent + Huggies P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit cremas para bebé + Pañales Etapa 1",
+      description: "Crema anti-rozaduras, loción hidratante, shampoo + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Johnson's Baby + Winny Etapa 1",
+      store: "Alkosto / D1 / Ara",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 14,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Conjunto verano P + Pañales P",
-      description: "Conjuntos de verano talla P + Paquete pañales P",
-      brands: "Disney Baby + Pampers P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit cremas Mustela premium + Pañales Etapa 2",
+      description: "Kit de cremas especializadas para piel sensible + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Mustela + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 15,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Kit de alimentación + Pañales P",
-      description: "Biberones y chupetes + Paquete pañales P",
-      brands: "MAM + Winny P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Toalla con capucha safari + Pañales Etapa 1",
+      description: "Toalla de microfibra con capucha temática safari + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Arrurrú + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 16,
-      category: "🌟 Primeros Meses (3-6 meses)",
-      gift: "Sábanas para cuna + Pañales P",
-      description: "Juego de sábanas de algodón + Paquete pañales P",
-      brands: "Baby Colors + Babysec P",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Toalla de baño grande + Pañales Etapa 2",
+      description: "Toalla extra suave para hora del baño + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Carter's + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
 
-    // Más Activo (6-9 meses) - Pañales M
+    // DORMITORIO Y DESCANSO
     {
       id: 17,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Bodies M + Pañales M",
-      description:
-        "Bodies de algodón orgánico talla M (6 pack) + Paquete pañales M",
-      brands: "Gerber + Huggies M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Sábanas para cuna safari + Pañales Etapa 1",
+      description: "Juego de sábanas temática safari para cuna + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Arrurrú + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 18,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Pijamas M + Pañales M",
-      description:
-        "Pijamas enterizas con cremallera talla M + Paquete pañales M",
-      brands: "Carter's + Pampers M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Edredón térmico + Pañales Etapa 2",
+      description: "Edredón ligero para todas las estaciones + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Arrurrú + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 19,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Libros de tela + Pañales M",
-      description: "Libros suaves para explorar + Paquete pañales M",
-      brands: "Fisher-Price + Winny M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Toldillo antimosquitos + Pañales Etapa 2",
+      description: "Toldillo protector para cuna con fácil instalación + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Baby Fresh + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 20,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Kit higiene completo + Pañales M",
-      description: "Termómetro + kit aseo con cepillo + Paquete pañales M",
-      brands: "Chicco + Babysec M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Esquimal/Manta térmica + Pañales Etapa 0",
+      description: "Esquimal de algodón para recién nacido + Pañales Winny Etapa 0 (hasta 4.5kg)",
+      brands: "Carter's + Winny Etapa 0",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 21,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Suéter ligero M + Pañales M",
-      description: "Chaqueta o suéter de algodón talla M + Paquete pañales M",
-      brands: "Baby Colors + Huggies M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Almohada ergonómica + Pañales Etapa 3",
+      description: "Almohada especial para bebé + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "Chicco + Winny Etapa 3",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
+
+    // ALIMENTACIÓN
     {
       id: 22,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Zapatos primeros pasos + Pañales M",
-      description: "Zapatos blandos para gatear + Paquete pañales M",
-      brands: "Stride Rite + Pampers M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Teteros antirreflujo + Pañales Etapa 1",
+      description: "Teteros Dr. Brown's antirreflujo con sistema de ventilación + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Dr. Brown's + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 23,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Juguetes sensoriales + Pañales M",
-      description: "Sonajeros y juguetes de texturas + Paquete pañales M",
-      brands: "VTech + Winny M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Teteros anticólicos + Pañales Etapa 2",
+      description: "Teteros Philips Avent anticólicos + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Philips Avent + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 24,
-      category: "🚀 Más Activo (6-9 meses)",
-      gift: "Ropa de verano M + Pañales M",
-      description: "Shorts y camisetas talla M + Paquete pañales M",
-      brands: "Offcorss + Babysec M",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Esterilizador de teteros + Pañales Etapa 2",
+      description: "Esterilizador para 6 teteros con funcionamiento eléctrico + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Philips Avent + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
-
-    // Explorando (9-12 meses) - Pañales G
     {
       id: 25,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Bodies G + Pañales G",
-      description:
-        "Bodies de algodón orgánico talla G (6 pack) + Paquete pañales G",
-      brands: "Gerber + Huggies G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Extractor de leche manual + Pañales Etapa 1",
+      description: "Extractor manual cómodo y eficiente + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Medela + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 26,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Pijamas G + Pañales G",
-      description:
-        "Pijamas enterizas con cremallera talla G + Paquete pañales G",
-      brands: "Carter's + Pampers G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Vajilla para bebé + Pañales Etapa 3",
+      description: "Platos, vasos y cubiertos antideslizantes + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "Munchkin + Winny Etapa 3",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 27,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Zapatos para caminar + Pañales G",
-      description: "Zapatos con suela flexible + Paquete pañales G",
-      brands: "Nike + Winny G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Protector de pezones + Pañales Etapa 1",
+      description: "Protectores para lactancia cómodos + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Medela + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
+
+    // TRANSPORTE Y PASEO
     {
       id: 28,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Juguetes educativos + Pañales G",
-      description: "Cubos apilables y encajables + Paquete pañales G",
-      brands: "Fisher-Price + Babysec G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Coche/Cochecito completo + Pañales Etapa 1",
+      description: "Coche con sistema de seguridad y accesorios + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Chicco + Winny Etapa 1",
+      store: "Falabella / Alkosto",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 29,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Ropa casual G + Pañales G",
-      description: "Pantalones y camisas talla G + Paquete pañales G",
-      brands: "Disney Baby + Huggies G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Canguro/Portabebés ergonómico + Pañales Etapa 2",
+      description: "Portabebés con múltiples posiciones + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Ergobaby + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 30,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Vajilla para bebé + Pañales G",
-      description: "Platos, vasos y cubiertos + Paquete pañales G",
-      brands: "Munchkin + Pampers G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Caminador con juguetes + Pañales Etapa 3",
+      description: "Caminador musical con actividades + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "Chicco + Winny Etapa 3",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
+
+    // JUGUETES Y ESTIMULACIÓN
     {
       id: 31,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Caminador o andador + Pañales G",
-      description: "Caminador con juguetes + Paquete pañales G",
-      brands: "Chicco + Winny G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Gimnasio de actividades + Pañales Etapa 1",
+      description: "Manta de juegos con arcos y juguetes colgantes + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Fisher-Price + Winny Etapa 1",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 32,
-      category: "🎯 Explorando (9-12 meses)",
-      gift: "Libros de cartón + Pañales G",
-      description: "Libros resistentes con imágenes + Paquete pañales G",
-      brands: "Editorial Norma + Babysec G",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Sonajeros estimulantes + Pañales Etapa 1",
+      description: "Set de sonajeros con diferentes texturas y sonidos + Pañales Winny Etapa 1 (4-7kg)",
+      brands: "Fisher-Price + Winny Etapa 1",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
-
-    // Primera Infancia (12+ meses) - Pañales XG / Pull-ups
     {
       id: 33,
-      category: "🌈 Primera Infancia (12+ meses)",
-      gift: "Ropa talla 12M + Pull-ups",
-      description: "Conjunto completo talla 12 meses + Pañales tipo calzón",
-      brands: "Carter's + Huggies Pull-ups",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Mordederas sensoriales + Pañales Etapa 2",
+      description: "Mordederas de silicona con diferentes formas + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Chicco + Winny Etapa 2",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 34,
-      category: "🌈 Primera Infancia (12+ meses)",
-      gift: "Zapatos talla 4-5 + Pull-ups",
-      description: "Zapatos para primeros pasos + Pañales tipo calzón",
-      brands: "Adidas + Pampers Easy-ups",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Mordedoras avanzadas + Pañales Etapa 3",
+      description: "Mordederas con gel refrigerante y texturas + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "MAM + Winny Etapa 3",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 35,
-      category: "🌈 Primera Infancia (12+ meses)",
-      gift: "Juguetes de arrastre + Pull-ups",
-      description: "Juguetes con ruedas para arrastrar + Pañales tipo calzón",
-      brands: "Melissa & Doug + Winny Pants",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Móvil musical para cuna + Pañales Etapa 2",
+      description: "Móvil con melodías y figuras rotativas + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Chicco + Winny Etapa 2",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 36,
-      category: "🌈 Primera Infancia (12+ meses)",
-      gift: "Instrumentos musicales + Pull-ups",
-      description: "Piano, tambor y maracas + Pañales tipo calzón",
-      brands: "Baby Einstein + Babysec Pants",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Juguetes educativos + Pañales Etapa 3",
+      description: "Cubos apilables y encajables para desarrollo + Pañales Winny Etapa 3 (8-12kg)",
+      brands: "Fisher-Price + Winny Etapa 3",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 37,
-      category: "🌈 Primera Infancia (12+ meses)",
-      gift: "Rompecabezas grandes + Pull-ups",
-      description: "Rompecabezas de piezas grandes + Pañales tipo calzón",
-      brands: "Ravensburger + Huggies Pull-ups",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Libros de tela + Pañales Etapa 2",
+      description: "Libros suaves con texturas y sonidos + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Fisher-Price + Winny Etapa 2",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 38,
-      category: "🌈 Primera Infancia (12+ meses)",
-      gift: "Kit arte y creatividad + Pull-ups",
-      description: "Crayones grandes y papel + Pañales tipo calzón",
-      brands: "Crayola + Pampers Easy-ups",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Peluche musical + Pañales Etapa 2",
+      description: "Peluche suave con melodías relajantes + Pañales Winny Etapa 2 (6-9kg)",
+      brands: "Chicco + Winny Etapa 2",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
 
-    // Regalos Especiales (Para los papás)
+    // REGALOS ESPECIALES PREMIUM
     {
       id: 39,
-      category: "💎 Regalos Especiales",
-      gift: "Monitor para bebé",
-      description: "Monitor de video y audio con app móvil",
-      brands: "Motorola, Philips Avent",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Coche Premium con accesorios",
+      description: "Coche completo con base para carro, lluvia, mosquitero y bolso",
+      brands: "Graco, Chicco",
+      store: "Falabella / Alkosto",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 40,
-      category: "💎 Regalos Especiales",
-      gift: "Esterilizador eléctrico",
-      description: "Esterilizador de biberones y accesorios",
-      brands: "Chicco, MAM",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Mecedora automática musical",
+      description: "Mecedora con movimiento automático, música y control remoto",
+      brands: "Muebles Jamar, Alkosto",
+      store: "Alkosto / Falabella",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 41,
-      category: "💎 Regalos Especiales",
-      gift: "Cámara instantánea",
-      description: "Cámara para capturar momentos especiales",
-      brands: "Fujifilm Instax Mini",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Esterilizador profesional UV",
+      description: "Esterilizador eléctrico con luz UV de alta capacidad",
+      brands: "Philips Avent, Chicco",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 42,
-      category: "💎 Regalos Especiales",
-      gift: "Humidificador ultrasónico",
-      description: "Humidificador con luz nocturna",
-      brands: "Crane, Safety 1st",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Extractor eléctrico doble",
+      description: "Extractor de leche eléctrico doble con accesorios completos",
+      brands: "Medela, Philips Avent",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 43,
-      category: "💎 Regalos Especiales",
-      gift: "Cojín de lactancia",
-      description: "Cojín ergonómico para alimentación",
-      brands: "Chicco, Boppy",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Monitor de bebé con video",
+      description: "Monitor con cámara HD, aplicación móvil y audio bidireccional",
+      brands: "Motorola, Safety 1st",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 44,
-      category: "💎 Regalos Especiales",
-      gift: "Bañera ergonómica",
-      description: "Bañera con termómetro integrado",
-      brands: "Summer Infant, Munchkin",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit completo para cuna",
+      description: "Sábanas, edredón, protector, toldillo y almohada conjunto safari",
+      brands: "Arrurrú, Carter's",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 45,
-      category: "💎 Regalos Especiales",
-      gift: "Mochila pañalera",
-      description: "Mochila con compartimentos organizadores",
-      brands: "Skip Hop, JJ Cole",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit alimentación profesional",
+      description: "Teteros, esterilizador, extractor manual y todos los accesorios",
+      brands: "Dr. Brown's, Philips Avent",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 46,
-      category: "💎 Regalos Especiales",
-      gift: "Báscula digital para bebé",
-      description: "Báscula precisa para seguimiento de peso",
-      brands: "Chicco, Safety 1st",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Gimnasio completo safari",
+      description: "Gimnasio con múltiples juguetes, luces, sonidos y temática safari",
+      brands: "Fisher-Price, Chicco",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 47,
-      category: "💎 Regalos Especiales",
-      gift: "Silla mecedora",
-      description: "Silla con movimiento automático y música",
-      brands: "Fisher-Price, Graco",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Centro de entretenimiento",
+      description: "Mesa de actividades con luces, sonidos y juguetes giratorios",
+      brands: "Fisher-Price, VTech",
+      store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 48,
-      category: "💎 Regalos Especiales",
-      gift: "Kit de emergencia",
-      description: "Botiquín completo para bebé",
-      brands: "Safety 1st, Munchkin",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit báscula y termómetro",
+      description: "Báscula digital para bebé y termómetro infrarrojo",
+      brands: "Safety 1st, Chicco",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 49,
-      category: "💎 Regalos Especiales",
-      gift: "Gimnasio de actividades",
-      description: "Manta de juegos con arcos y juguetes",
-      brands: "Fisher-Price, Tiny Love",
-      store: "Falabella / Éxito",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Humidificador con aromaterapia",
+      description: "Humidificador ultrasónico con luz nocturna y aromas",
+      brands: "Crane, Safety 1st",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
     },
     {
       id: 50,
-      category: "💎 Regalos Especiales",
-      gift: "Album de recuerdos",
-      description: "Album para fotos y recuerdos del primer año",
+      category: "🦁 Regalos para Maximiliano",
+      gift: "Kit recuerdos primer año",
+      description: "Álbum de fotos, marco huellitas y libro de recuerdos",
       brands: "Hallmark, C.R. Gibson",
-      store: "Falabella / Éxito",
+      store: "Falabella / Alkosto / Éxito",
       reserved: false,
       reservedBy: "",
       phone: "",
@@ -612,33 +603,19 @@ export default function BabyShowerGiftSelector() {
   const [showReserved, setShowReserved] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [showSummary, setShowSummary] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
   const [phoneError, setPhoneError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Cargar datos desde localStorage al montar el componente
+  // Mostrar pop-up de instrucciones al cargar
   useEffect(() => {
-    try {
-      const savedGifts = localStorage.getItem("babyShowerGifts");
-      if (savedGifts) {
-        setGifts(JSON.parse(savedGifts));
-      }
-    } catch (error) {
-      console.error("Error loading saved gifts:", error);
-    } finally {
+    const timer = setTimeout(() => {
       setIsLoading(false);
-    }
-  }, []);
+      setShowInstructions(true);
+    }, 1000);
 
-  // Guardar en localStorage cada vez que cambian los regalos
-  useEffect(() => {
-    if (!isLoading) {
-      try {
-        localStorage.setItem("babyShowerGifts", JSON.stringify(gifts));
-      } catch (error) {
-        console.error("Error saving gifts:", error);
-      }
-    }
-  }, [gifts, isLoading]);
+    return () => clearTimeout(timer);
+  }, []);
 
   const validatePhone = (phone: string): boolean => {
     const phoneRegex = /^3[0-9]{9}$/;
@@ -715,7 +692,6 @@ export default function BabyShowerGiftSelector() {
         phone: "",
       }));
       setGifts(resetGifts);
-      localStorage.removeItem("babyShowerGifts");
     }
   };
 
@@ -759,7 +735,7 @@ export default function BabyShowerGiftSelector() {
 
   const generateWhatsAppLink = () => {
     const reservedGifts = gifts.filter((gift) => gift.reserved);
-    const message = `🎁 *Resumen de Regalos Baby Shower*\n\n${reservedGifts
+    const message = `🦁 *Resumen de Regalos Baby Shower - Maximiliano*\n\n${reservedGifts
       .map((gift) => `• ${gift.reservedBy} (${gift.phone}): ${gift.gift}`)
       .join("\n")}\n\n📊 Total: ${stats.totalReserved} de ${
       stats.totalGifts
@@ -770,74 +746,53 @@ export default function BabyShowerGiftSelector() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-amber-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-pink-300 border-t-pink-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Cargando regalos...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-green-300 border-t-green-600 mx-auto mb-4"></div>
+          <p className="text-green-800 text-lg">Cargando regalos safari para Maximiliano...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream to-cream p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-amber-100 p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-gold-light to-gold text-white drop-shadow-sm rounded-3xl p-8 text-center shadow-2xl mb-6">
+        <div className="bg-gradient-to-r from-green-700 to-yellow-600 text-white rounded-3xl p-8 text-center shadow-2xl mb-6">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Gift className="w-10 h-10 animate-bounce" />
             <h1 className="text-4xl font-bold">
-              Selector de Regalos Baby Shower - Maximiliano
+              🦁 Baby Shower Safari - Maximiliano 🐾
             </h1>
-            <Heart
-              className="w-10 h-10 animate-pulse"
-              style={{ color: "#D4AF37" }}
-            />
+            <Heart className="w-10 h-10 animate-pulse text-yellow-300" />
           </div>
 
           <p className="text-xl opacity-90 mb-6">
-            Regalos únicos con pañales por etapa - ¡Sin repetidos!
+            🎁 Aventura Safari: Regalos únicos pensando en tu presupuesto 🌿
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div
-              className="glass-effect rounded-2xl px-6 py-4"
-              style={{ backgroundColor: "rgba(251, 248, 243, 0.8)" }}
-            >
+            <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4">
               <div className="flex items-center justify-center gap-2">
-                <Users className="w-6 h-6" style={{ color: "#9CAF88" }} />
-                <span
-                  className="font-semibold text-lg"
-                  style={{ color: "#6B7F5A" }}
-                >
+                <Users className="w-6 h-6 text-green-300" />
+                <span className="font-semibold text-lg">
                   {stats.totalGifts - stats.totalReserved} Disponibles
                 </span>
               </div>
             </div>
-            <div
-              className="glass-effect rounded-2xl px-6 py-4"
-              style={{ backgroundColor: "rgba(251, 248, 243, 0.8)" }}
-            >
+            <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4">
               <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="w-6 h-6" style={{ color: "#9CAF88" }} />
-                <span
-                  className="font-semibold text-lg"
-                  style={{ color: "#6B7F5A" }}
-                >
+                <CheckCircle className="w-6 h-6 text-yellow-300" />
+                <span className="font-semibold text-lg">
                   {stats.totalReserved} Reservados
                 </span>
               </div>
             </div>
-            <div
-              className="glass-effect rounded-2xl px-6 py-4"
-              style={{ backgroundColor: "rgba(251, 248, 243, 0.8)" }}
-            >
+            <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4">
               <div className="flex items-center justify-center gap-2">
-                <BarChart3 className="w-6 h-6" style={{ color: "#9CAF88" }} />
-                <span
-                  className="font-semibold text-lg"
-                  style={{ color: "#6B7F5A" }}
-                >
+                <BarChart3 className="w-6 h-6 text-amber-300" />
+                <span className="font-semibold text-lg">
                   {stats.percentage}% Completado
                 </span>
               </div>
@@ -846,57 +801,55 @@ export default function BabyShowerGiftSelector() {
 
           <div className="bg-white/20 rounded-full h-4 mb-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-gold-light to-sage h-full transition-all duration-1000 ease-out"
+              className="bg-gradient-to-r from-green-400 to-yellow-500 h-full transition-all duration-1000 ease-out"
               style={{ width: `${stats.percentage}%` }}
             ></div>
           </div>
-          <p className="text-sm opacity-90">Progreso del Baby Shower</p>
+          <p className="text-sm opacity-90">Progreso de nuestra aventura safari 🦁</p>
         </div>
 
         {/* Controls */}
-        <div className="card mb-6">
+        <div className="bg-amber-50 rounded-3xl shadow-xl p-6 mb-6 border-2 border-green-200">
           <div className="flex flex-col lg:flex-row gap-4 mb-4">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-green-600 w-5 h-5" />
               <input
                 type="text"
                 placeholder="🔍 Buscar regalo, marca, categoría..."
-                className="input-field pl-12 text-lg"
+                className="w-full pl-12 pr-4 py-3 border-2 border-green-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-lg bg-white"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <div className="flex flex-wrap gap-3">
               <button
+                onClick={() => setShowInstructions(true)}
+                className="flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-xl font-medium hover:bg-amber-700 transition-all shadow-lg"
+              >
+                <Info className="w-4 h-4" />
+                📋 Instrucciones
+              </button>
+              <button
                 onClick={() => setShowReserved(!showReserved)}
                 className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
                   showReserved
-                    ? "bg-sage text-cream hover:bg-sage-dark shadow-lg"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-green-600 text-white hover:bg-green-700 shadow-lg"
+                    : "bg-green-100 text-green-700 hover:bg-green-200"
                 }`}
-                style={
-                  showReserved
-                    ? {
-                        backgroundColor: "#9CAF88",
-                        color: "#FBF8F3",
-                      }
-                    : {}
-                }
               >
                 <Filter className="w-4 h-4" />
                 {showReserved ? "✅ Reservados" : "📋 Disponibles"}
               </button>
               <button
                 onClick={() => setShowSummary(!showSummary)}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium hover:bg-gold transition-all shadow-lg"
-                style={{ backgroundColor: "#D4AF37", color: "#FBF8F3" }}
+                className="flex items-center gap-2 px-6 py-3 bg-yellow-600 text-white rounded-xl font-medium hover:bg-yellow-700 transition-all shadow-lg"
               >
                 <BarChart3 className="w-4 h-4" />
                 📊 Resumen
               </button>
               <button
                 onClick={resetAllReservations}
-                className="flex items-center gap-2 px-6 py-3 bg-sage-dark text-white rounded-xl font-medium hover:bg-sage transition-all shadow-lg"
+                className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-medium hover:bg-red-700 transition-all shadow-lg"
                 title="Reiniciar todas las reservas"
               >
                 <RefreshCw className="w-4 h-4" />
@@ -906,64 +859,153 @@ export default function BabyShowerGiftSelector() {
           </div>
         </div>
 
-        {/* Summary Modal */}
-        {showSummary && (
+        {/* Instructions Modal */}
+        {showInstructions && (
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-cream rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
+            <div className="bg-amber-50 rounded-3xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-green-300">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                  <BarChart3 className="w-8 h-8" style={{ color: "#D4AF37" }} />
-                  Resumen de Reservas
+                <h3 className="text-3xl font-bold text-green-800 flex items-center gap-2">
+                  🦁 Instrucciones Safari - Baby Shower Maximiliano
                 </h3>
                 <button
-                  onClick={() => setShowSummary(false)}
-                  className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-100 transition-all"
+                  onClick={() => setShowInstructions(false)}
+                  className="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100 transition-all"
                 >
                   <X className="w-6 h-6" />
                 </button>
               </div>
 
-              <div className="bg-gray-50 p-6 rounded-2xl mb-6 border-2 border-gray-100">
-                <pre className="whitespace-pre-wrap text-sm text-gray-700 font-mono">
+              <div className="grid md:grid-cols-2 gap-8 text-left">
+                <div className="space-y-4">
+                  <h5 className="text-lg font-bold text-green-700 flex items-center gap-2">
+                    <Gift className="w-5 h-5" />
+                    🐾 Cómo funciona:
+                  </h5>
+                  <div className="space-y-3 text-sm text-green-800">
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                        1
+                      </div>
+                      <p>Explora y selecciona el regalo que quieres dar</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                        2
+                      </div>
+                      <p>Escribe tu nombre completo</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                        3
+                      </div>
+                      <p>Ingresa tu número de celular</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                        4
+                      </div>
+                      <p>Confirma la reserva ¡y listo!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h5 className="text-lg font-bold text-amber-700 flex items-center gap-2">
+                    <Star className="w-5 h-5" />
+                    🌿 Información importante:
+                  </h5>
+                  <div className="space-y-3 text-sm text-green-800">
+                    <p className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>
+                        <strong>📦 Etapas Winny:</strong> 0 (hasta 4.5kg) → 1 (4-7kg) → 2 (6-9kg) → 3 (8-12kg) → 4 (10-16kg)
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                      <span>
+                        <strong>🏷️ Pañales recomendados:</strong> Winny, Pampers
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>
+                        <strong>🔒 Una vez reservado, nadie más podrá elegir ese regalo</strong>
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                      <span>
+                        <strong>📞 Tu teléfono será visible para coordinación</strong>
+                      </span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>
+                        <strong>🛒 Tiendas:</strong> Alkosto, Falabella, Éxito, Pepe Ganga, D1, Ara
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 p-6 bg-gradient-to-r from-green-100 to-yellow-100 rounded-2xl border-2 border-green-300">
+                <h5 className="text-lg font-bold text-green-800 mb-4 text-center">
+                  🦁 ¡Cada regalo incluye pañales según la etapa! 🌿
+                </h5>
+                <p className="text-center text-green-700">
+                  Los regalos están organizados por edades y cada uno incluye los pañales Winny correspondientes a esa etapa de crecimiento de Maximiliano.
+                </p>
+              </div>
+
+              <div className="text-center mt-6">
+                <button
+                  onClick={() => setShowInstructions(false)}
+                  className="bg-green-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg"
+                >
+                  🦁 ¡Entendido! Comenzar Safari
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Summary Modal */}
+        {showSummary && (
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+            <div className="bg-amber-50 rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border-4 border-green-300">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-3xl font-bold text-green-800 flex items-center gap-2">
+                  <BarChart3 className="w-8 h-8 text-green-600" />
+                  Resumen Safari de Regalos
+                </h3>
+                <button
+                  onClick={() => setShowSummary(false)}
+                  className="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100 transition-all"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="bg-green-50 p-6 rounded-2xl mb-6 border-2 border-green-200">
+                <pre className="whitespace-pre-wrap text-sm text-green-800 font-mono">
                   {generateSummary() || "No hay reservas aún..."}
                 </pre>
               </div>
 
               <div className="text-center space-y-4">
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div
-                    className="p-4 rounded-xl border-2"
-                    style={{
-                      backgroundColor: "#F4E4BC",
-                      borderColor: "#D4AF37",
-                    }}
-                  >
-                    <p
-                      className="text-2xl font-bold"
-                      style={{ color: "#6B7F5A" }}
-                    >
+                  <div className="bg-green-100 p-4 rounded-xl border-2 border-green-300">
+                    <p className="text-2xl font-bold text-green-700">
                       {stats.totalReserved}
                     </p>
-                    <p className="text-sm" style={{ color: "#9CAF88" }}>
-                      Reservados
-                    </p>
+                    <p className="text-sm text-green-600">Reservados</p>
                   </div>
-                  <div
-                    className="p-4 rounded-xl border-2"
-                    style={{
-                      backgroundColor: "#F4E4BC",
-                      borderColor: "#D4AF37",
-                    }}
-                  >
-                    <p
-                      className="text-2xl font-bold"
-                      style={{ color: "#6B7F5A" }}
-                    >
+                  <div className="bg-yellow-100 p-4 rounded-xl border-2 border-yellow-300">
+                    <p className="text-2xl font-bold text-yellow-700">
                       {stats.totalGifts - stats.totalReserved}
                     </p>
-                    <p className="text-sm" style={{ color: "#9CAF88" }}>
-                      Disponibles
-                    </p>
+                    <p className="text-sm text-yellow-600">Disponibles</p>
                   </div>
                 </div>
 
@@ -972,8 +1014,7 @@ export default function BabyShowerGiftSelector() {
                     href={generateWhatsAppLink()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all shadow-lg"
-                    style={{ backgroundColor: "#9CAF88", color: "#FBF8F3" }}
+                    className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition-all shadow-lg"
                   >
                     <Share2 className="w-5 h-5" />
                     📱 Compartir por WhatsApp
@@ -987,12 +1028,12 @@ export default function BabyShowerGiftSelector() {
         {/* Gift List */}
         <div className="space-y-8">
           {Object.keys(groupedGifts).length === 0 ? (
-            <div className="text-center py-16 bg-cream rounded-3xl shadow-lg">
+            <div className="text-center py-16 bg-amber-50 rounded-3xl shadow-lg border-2 border-green-200">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-2">
+              <h3 className="text-2xl font-bold text-green-700 mb-2">
                 No se encontraron regalos
               </h3>
-              <p className="text-gray-500">
+              <p className="text-green-600">
                 Intenta con otro término de búsqueda
               </p>
             </div>
@@ -1000,17 +1041,14 @@ export default function BabyShowerGiftSelector() {
             Object.entries(groupedGifts).map(([category, categoryGifts]) => (
               <div
                 key={category}
-                className="bg-cream rounded-3xl shadow-xl p-8 border border-gray-100"
+                className="bg-amber-50 rounded-3xl shadow-xl p-8 border-2 border-green-200"
               >
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
-                  <Star className="w-6 h-6" style={{ color: "#D4AF37" }} />
-                  <h3 className="text-2xl font-bold text-gray-800">
+                <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-green-200">
+                  <Star className="w-6 h-6 text-yellow-600" />
+                  <h3 className="text-2xl font-bold text-green-800">
                     {category}
                   </h3>
-                  <span
-                    className="px-3 py-1 rounded-full text-sm font-semibold"
-                    style={{ backgroundColor: "#F4E4BC", color: "#6B7F5A" }}
-                  >
+                  <span className="bg-green-200 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
                     {categoryGifts.length} regalo
                     {categoryGifts.length !== 1 ? "s" : ""}
                   </span>
@@ -1020,79 +1058,49 @@ export default function BabyShowerGiftSelector() {
                   {categoryGifts.map((gift) => (
                     <div
                       key={gift.id}
-                      className={`relative group rounded-2xl border-2 transition-all duration-300 overflow-hidden border-sage ${
+                      className={`relative group rounded-2xl border-2 transition-all duration-300 overflow-hidden ${
                         gift.reserved
-                          ? "border-sage bg-sage/10 shadow-lg"
+                          ? "border-green-500 bg-green-100 shadow-lg"
                           : selectedGift?.id === gift.id
-                          ? "border-gold bg-gold-light/20 shadow-xl scale-105"
-                          : "border-gray-200 bg-cream hover:border-gold hover:shadow-xl hover:scale-105 cursor-pointer"
+                          ? "border-yellow-500 bg-yellow-100 shadow-xl scale-105"
+                          : "border-green-300 bg-white hover:border-yellow-500 hover:shadow-xl hover:scale-105 cursor-pointer"
                       }`}
                       onClick={() => !gift.reserved && handleSelectGift(gift)}
-                      style={{
-                        borderColor: gift.reserved
-                          ? "#9CAF88"
-                          : selectedGift?.id === gift.id
-                          ? "#D4AF37"
-                          : undefined,
-                        backgroundColor: gift.reserved
-                          ? "rgba(156, 175, 136, 0.1)"
-                          : selectedGift?.id === gift.id
-                          ? "rgba(244, 228, 188, 0.2)"
-                          : "#FBF8F3",
-                      }}
                     >
                       <div className="p-6 h-full flex flex-col">
                         <div className="flex-1 space-y-3">
                           <h4
                             className={`font-bold text-lg leading-tight ${
-                              gift.reserved ? "text-sage-dark" : "text-gray-800"
+                              gift.reserved ? "text-green-800" : "text-green-900"
                             }`}
-                            style={{
-                              color: gift.reserved ? "#6B7F5A" : undefined,
-                            }}
                           >
                             🎁 {gift.gift}
                           </h4>
 
-                          <p className="text-sm text-sage-dark leading-relaxed">
+                          <p className="text-sm text-green-700 leading-relaxed">
                             {gift.description}
                           </p>
 
                           <div className="space-y-2">
                             <div className="flex items-center gap-2">
-                              <div
-                                className="w-2 h-2 rounded-full"
-                                style={{ backgroundColor: "#9CAF88" }}
-                              ></div>
-                              <p
-                                className="text-xs font-medium"
-                                style={{ color: "#6B7F5A" }}
-                              >
+                              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                              <p className="text-xs font-medium text-green-700">
                                 🏪 {gift.store}
                               </p>
                             </div>
                             <div className="flex items-center gap-2">
-                              <div
-                                className="w-2 h-2 rounded-full"
-                                style={{ backgroundColor: "#D4AF37" }}
-                              ></div>
-                              <p
-                                className="text-xs italic"
-                                style={{ color: "#D4AF37" }}
-                              >
+                              <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
+                              <p className="text-xs italic text-yellow-700">
                                 {gift.brands}
                               </p>
                             </div>
                           </div>
                         </div>
 
-                        <div className="mt-4 pt-4 border-t border-gray-100">
+                        <div className="mt-4 pt-4 border-t border-green-200">
                           {gift.reserved ? (
                             <div className="space-y-3">
-                              <div
-                                className="text-cream px-4 py-3 rounded-xl text-center text-sm font-medium"
-                                style={{ backgroundColor: "#9CAF88" }}
-                              >
+                              <div className="bg-green-600 text-white px-4 py-3 rounded-xl text-center text-sm font-medium">
                                 <div className="flex items-center justify-center gap-2 mb-1">
                                   <CheckCircle className="w-4 h-4" />
                                   <span>✅ Reservado</span>
@@ -1119,13 +1127,7 @@ export default function BabyShowerGiftSelector() {
                               )}
                             </div>
                           ) : (
-                            <button
-                              className="w-full text-center px-4 py-3 rounded-xl font-medium transition-all"
-                              style={{
-                                backgroundColor: "#D4AF37",
-                                color: "#FBF8F3",
-                              }}
-                            >
+                            <button className="w-full bg-green-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-green-700 transition-all">
                               <Gift className="w-4 h-4 mr-2 inline" />
                               Seleccionar Regalo
                             </button>
@@ -1134,7 +1136,7 @@ export default function BabyShowerGiftSelector() {
                       </div>
 
                       {!gift.reserved && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-gold-light/10 to-sage/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                       )}
                     </div>
                   ))}
@@ -1147,55 +1149,31 @@ export default function BabyShowerGiftSelector() {
         {/* Reservation Modal */}
         {selectedGift && (
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-cream rounded-3xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="bg-amber-50 rounded-3xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-green-300">
               <div className="text-center mb-6">
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: "#F4E4BC" }}
-                >
-                  <Gift className="w-8 h-8" style={{ color: "#D4AF37" }} />
+                <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Gift className="w-8 h-8 text-green-700" />
                 </div>
-                <h3 className="text-3xl font-bold text-gray-800">
-                  🎁 Reservar Regalo
+                <h3 className="text-3xl font-bold text-green-800">
+                  🦁 Reservar Regalo Safari
                 </h3>
               </div>
 
-              <div
-                className="p-6 rounded-2xl mb-6 border-2"
-                style={{ backgroundColor: "#F4E4BC", borderColor: "#D4AF37" }}
-              >
-                <h4
-                  className="font-bold mb-3 text-xl flex items-center gap-2"
-                  style={{ color: "#6B7F5A" }}
-                >
-                  <Star className="w-5 h-5" style={{ color: "#D4AF37" }} />
+              <div className="bg-green-100 p-6 rounded-2xl mb-6 border-2 border-green-300">
+                <h4 className="font-bold mb-3 text-xl text-green-800 flex items-center gap-2">
+                  <Star className="w-5 h-5 text-yellow-600" />
                   {selectedGift.gift}
                 </h4>
-                <p
-                  className="text-sm mb-3 leading-relaxed"
-                  style={{ color: "#6B7F5A" }}
-                >
+                <p className="text-sm text-green-700 mb-3 leading-relaxed">
                   {selectedGift.description}
                 </p>
                 <div className="space-y-2">
-                  <p
-                    className="text-xs font-medium flex items-center gap-2"
-                    style={{ color: "#9CAF88" }}
-                  >
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "#9CAF88" }}
-                    ></div>
+                  <p className="text-xs font-medium text-green-700 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-600 rounded-full"></div>
                     🏪 {selectedGift.store}
                   </p>
-                  <p
-                    className="text-xs italic flex items-center gap-2"
-                    style={{ color: "#D4AF37" }}
-                  >
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "#D4AF37" }}
-                    ></div>
+                  <p className="text-xs italic text-yellow-700 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
                     {selectedGift.brands}
                   </p>
                 </div>
@@ -1203,8 +1181,8 @@ export default function BabyShowerGiftSelector() {
 
               <div className="space-y-6 mb-8">
                 <div>
-                  <label className="block text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                    <User className="w-5 h-5" style={{ color: "#9CAF88" }} />
+                  <label className="block text-lg font-semibold text-green-800 mb-3 flex items-center gap-2">
+                    <User className="w-5 h-5 text-green-700" />
                     Tu nombre completo:
                   </label>
                   <input
@@ -1212,14 +1190,14 @@ export default function BabyShowerGiftSelector() {
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     placeholder="Ej: María González"
-                    className="input-field text-lg"
+                    className="w-full px-4 py-3 border-2 border-green-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-lg bg-white"
                     autoFocus
                   />
                 </div>
 
                 <div>
-                  <label className="block text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                    <Phone className="w-5 h-5" style={{ color: "#9CAF88" }} />
+                  <label className="block text-lg font-semibold text-green-800 mb-3 flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-green-700" />
                     Tu número de celular:
                   </label>
                   <input
@@ -1227,10 +1205,10 @@ export default function BabyShowerGiftSelector() {
                     value={userPhone}
                     onChange={handlePhoneChange}
                     placeholder="Ej: 320 123 4567"
-                    className={`input-field text-lg ${
+                    className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-4 outline-none transition-all text-lg bg-white ${
                       phoneError
                         ? "border-red-400 focus:border-red-400 focus:ring-red-100"
-                        : ""
+                        : "border-green-300 focus:border-green-500 focus:ring-green-100"
                     }`}
                     maxLength={13}
                     onKeyPress={(e) => {
@@ -1250,7 +1228,7 @@ export default function BabyShowerGiftSelector() {
                       {phoneError}
                     </p>
                   )}
-                  <p className="text-gray-500 text-sm mt-2 flex items-center gap-2">
+                  <p className="text-green-600 text-sm mt-2 flex items-center gap-2">
                     <Phone className="w-4 h-4" />
                     Formato: número colombiano de 10 dígitos
                   </p>
@@ -1263,7 +1241,7 @@ export default function BabyShowerGiftSelector() {
                     setSelectedGift(null);
                     setPhoneError("");
                   }}
-                  className="flex-1 text-lg py-4 rounded-xl font-medium transition-all bg-sage-dark hover:bg-sage text-cream shadow-lg"
+                  className="flex-1 bg-amber-600 text-white text-lg py-4 rounded-xl font-medium hover:bg-amber-700 transition-all"
                 >
                   Cancelar
                 </button>
@@ -1272,7 +1250,7 @@ export default function BabyShowerGiftSelector() {
                   disabled={
                     !userName.trim() || !userPhone.trim() || !!phoneError
                   }
-                  className="bg-gold text-cream hover:bg-gold-light  flex-1 text-lg py-4 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="flex-1 bg-green-600 text-white text-lg py-4 rounded-xl font-medium hover:bg-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   ✅ Confirmar
                 </button>
@@ -1282,125 +1260,12 @@ export default function BabyShowerGiftSelector() {
         )}
 
         {/* Footer */}
-        <div className="mt-12 text-center space-y-6">
-          <div className="bg-cream rounded-3xl p-8 shadow-xl border border-gray-100">
-            <h4 className="text-2xl font-bold text-gray-800 mb-6 flex items-center justify-center gap-3">
-              <Heart className="w-6 h-6" style={{ color: "#D4AF37" }} />
-              ¡Cada regalo incluye pañales por etapa!
-              <Heart className="w-6 h-6" style={{ color: "#D4AF37" }} />
-            </h4>
-
-            <div className="grid md:grid-cols-2 gap-8 text-left">
-              <div className="space-y-4">
-                <h5
-                  className="text-lg font-bold flex items-center gap-2"
-                  style={{ color: "#9CAF88" }}
-                >
-                  <Gift className="w-5 h-5" style={{ color: "#9CAF88" }} />
-                  📱 Instrucciones:
-                </h5>
-                <div className="space-y-3 text-sm text-gray-600">
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-cream font-bold text-xs mt-0.5"
-                      style={{ backgroundColor: "#D4AF37" }}
-                    >
-                      1
-                    </div>
-                    <p>Selecciona el regalo que quieres dar</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-cream font-bold text-xs mt-0.5"
-                      style={{ backgroundColor: "#D4AF37" }}
-                    >
-                      2
-                    </div>
-                    <p>Escribe tu nombre completo</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-cream font-bold text-xs mt-0.5"
-                      style={{ backgroundColor: "#D4AF37" }}
-                    >
-                      3
-                    </div>
-                    <p>Ingresa tu número de celular</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-cream font-bold text-xs mt-0.5"
-                      style={{ backgroundColor: "#D4AF37" }}
-                    >
-                      4
-                    </div>
-                    <p>Confirma la reserva</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h5
-                  className="text-lg font-bold flex items-center gap-2"
-                  style={{ color: "#9CAF88" }}
-                >
-                  <Star className="w-5 h-5" style={{ color: "#9CAF88" }} />
-                  ℹ️ Información importante:
-                </h5>
-                <div className="space-y-3 text-sm text-gray-600">
-                  <p className="flex items-center gap-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "#9CAF88" }}
-                    ></div>
-                    <span>
-                      <strong>📦 Pañales por etapa:</strong> RN → P → M → G →
-                      Pull-ups
-                    </span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "#9CAF88" }}
-                    ></div>
-                    <span>
-                      <strong>
-                        🔒 Una vez reservado, nadie más podrá elegir ese regalo
-                      </strong>
-                    </span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "#9CAF88" }}
-                    ></div>
-                    <span>
-                      <strong>
-                        📞 Tu teléfono será visible para coordinación
-                      </strong>
-                    </span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "#9CAF88" }}
-                    ></div>
-                    <span>
-                      <strong>
-                        🛒 Compra en Falabella o Éxito con las marcas sugeridas
-                      </strong>
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-gray-500 text-sm">
+        <div className="mt-12 text-center">
+          <div className="text-green-600 text-sm">
             <p className="flex items-center justify-center gap-2">
-              <Heart className="w-4 h-4" style={{ color: "#D4AF37" }} />
-              Hecho con amor para el Baby Shower
-              <Heart className="w-4 h-4" style={{ color: "#D4AF37" }} />
+              <Heart className="w-4 h-4 text-yellow-600" />
+              🦁 Hecho con amor safari para el Baby Shower de Maximiliano 🌿
+              <Heart className="w-4 h-4 text-yellow-600" />
             </p>
           </div>
         </div>
