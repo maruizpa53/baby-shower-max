@@ -943,14 +943,14 @@ export default function BabyShowerGiftSelector() {
                 <BarChart3 className="w-4 h-4" />
                 📊 Resumen
               </button>
-              <button
+{/*               <button
                 onClick={resetAllReservations}
                 className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-medium hover:bg-red-700 transition-all shadow-lg"
                 title="Reiniciar todas las reservas"
               >
                 <RefreshCw className="w-4 h-4" />
                 🔄 Reset
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
