@@ -1,6 +1,15 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { 
+  collection, 
+  doc, 
+  updateDoc, 
+  onSnapshot, 
+  setDoc,
+  getDocs 
+} from 'firebase/firestore';
+import { db } from '@/lib/firebase'; // Tu archivo de configuración Firebase
 import {
   Search,
   Gift,
@@ -31,7 +40,19 @@ interface Gift {
 }
 
 export default function BabyShowerGiftSelector() {
-  const [gifts, setGifts] = useState<Gift[]>([
+  const [gifts, setGifts] = useState<Gift[]>([]);
+  const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
+  const [userName, setUserName] = useState("");
+  const [userPhone, setUserPhone] = useState("");
+  const [showReserved, setShowReserved] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showSummary, setShowSummary] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Datos iniciales de regalos para inicializar Firebase
+  const initialGifts = [
     // ROPA Y ACCESORIOS
     {
       id: 1,
@@ -595,26 +616,63 @@ export default function BabyShowerGiftSelector() {
       reservedBy: "",
       phone: "",
     },
-  ]);
+  ];
 
-  const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
-  const [userName, setUserName] = useState("");
-  const [userPhone, setUserPhone] = useState("");
-  const [showReserved, setShowReserved] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showSummary, setShowSummary] = useState(false);
-  const [showInstructions, setShowInstructions] = useState(false);
-  const [phoneError, setPhoneError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  // Inicializar Firebase si es la primera vez
+  const initializeFirestore = async () => {
+    try {
+      const giftsCollection = collection(db, 'gifts');
+      const snapshot = await getDocs(giftsCollection);
+      
+      if (snapshot.empty) {
+        // Primera vez - subir datos iniciales
+        console.log('🦁 Inicializando safari de regalos...');
+        for (const gift of initialGifts) {
+          await setDoc(doc(db, 'gifts', gift.id.toString()), gift);
+        }
+        console.log('✅ Safari de regalos inicializado exitosamente!');
+      }
+    } catch (error) {
+      console.error('❌ Error inicializando Firestore:', error);
+    }
+  };
 
-  // Mostrar pop-up de instrucciones al cargar
+  // Escuchar cambios en tiempo real
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      setShowInstructions(true);
-    }, 1000);
+    console.log('🔄 Configurando conexión en tiempo real...');
+    
+    const unsubscribe = onSnapshot(
+      collection(db, 'gifts'),
+      (snapshot) => {
+        const giftsData = snapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: parseInt(doc.id)
+        })) as Gift[];
+        
+        // Ordenar por ID
+        giftsData.sort((a, b) => a.id - b.id);
+        setGifts(giftsData);
+        setIsLoading(false);
+        console.log('📊 Datos actualizados en tiempo real');
+      },
+      (error) => {
+        console.error('❌ Error escuchando cambios:', error);
+        setIsLoading(false);
+      }
+    );
 
-    return () => clearTimeout(timer);
+    // Inicializar si es necesario
+    initializeFirestore();
+
+    // Mostrar instrucciones después de cargar
+    setTimeout(() => {
+      setShowInstructions(true);
+    }, 2000);
+
+    return () => {
+      console.log('🔌 Desconectando tiempo real...');
+      unsubscribe();
+    };
   }, []);
 
   const validatePhone = (phone: string): boolean => {
@@ -650,48 +708,77 @@ export default function BabyShowerGiftSelector() {
     setPhoneError("");
   };
 
-  const handleReserveGift = () => {
-    if (!userName.trim() || !userPhone.trim() || !validatePhone(userPhone))
+  // Reservar regalo en Firebase
+  const handleReserveGift = async () => {
+    if (!selectedGift || !userName.trim() || !userPhone.trim() || !validatePhone(userPhone)) {
       return;
+    }
 
-    const updatedGifts = gifts.map((gift) =>
-      gift.id === selectedGift?.id
-        ? {
-            ...gift,
-            reserved: true,
-            reservedBy: userName.trim(),
-            phone: userPhone.trim(),
-          }
-        : gift
-    );
+    try {
+      console.log(`🎁 Reservando regalo: ${selectedGift.gift}`);
+      const giftRef = doc(db, 'gifts', selectedGift.id.toString());
+      await updateDoc(giftRef, {
+        reserved: true,
+        reservedBy: userName.trim(),
+        phone: userPhone.trim(),
+      });
 
-    setGifts(updatedGifts);
-    setSelectedGift(null);
-    setUserName("");
-    setUserPhone("");
-    setPhoneError("");
+      setSelectedGift(null);
+      setUserName("");
+      setUserPhone("");
+      setPhoneError("");
+      
+      console.log('✅ Regalo reservado exitosamente!');
+      // Opcional: mostrar notificación de éxito
+      alert('🦁 ¡Regalo reservado exitosamente para el safari de Maximiliano! 🎁');
+    } catch (error) {
+      console.error('❌ Error reservando regalo:', error);
+      alert('Error al reservar. Intenta de nuevo.');
+    }
   };
 
-  const handleCancelReservation = (giftId: number) => {
-    const updatedGifts = gifts.map((gift) =>
-      gift.id === giftId
-        ? { ...gift, reserved: false, reservedBy: "", phone: "" }
-        : gift
-    );
-    setGifts(updatedGifts);
-  };
-
-  const resetAllReservations = () => {
-    if (
-      window.confirm("¿Estás seguro de que quieres borrar todas las reservas?")
-    ) {
-      const resetGifts = gifts.map((gift) => ({
-        ...gift,
+  // Cancelar reserva en Firebase
+  const handleCancelReservation = async (giftId: number) => {
+    try {
+      console.log(`🔄 Cancelando reserva del regalo ID: ${giftId}`);
+      const giftRef = doc(db, 'gifts', giftId.toString());
+      await updateDoc(giftRef, {
         reserved: false,
         reservedBy: "",
         phone: "",
-      }));
-      setGifts(resetGifts);
+      });
+      console.log('✅ Reserva cancelada exitosamente!');
+    } catch (error) {
+      console.error('❌ Error cancelando reserva:', error);
+      alert('Error al cancelar. Intenta de nuevo.');
+    }
+  };
+
+  // Reset todas las reservas
+  const resetAllReservations = async () => {
+    if (!window.confirm("🦁 ¿Estás seguro de que quieres borrar todas las reservas del safari?")) {
+      return;
+    }
+
+    try {
+      console.log('🔄 Reseteando todas las reservas...');
+      const batch = [];
+      for (const gift of gifts) {
+        if (gift.reserved) {
+          const giftRef = doc(db, 'gifts', gift.id.toString());
+          batch.push(updateDoc(giftRef, {
+            reserved: false,
+            reservedBy: "",
+            phone: "",
+          }));
+        }
+      }
+      await Promise.all(batch);
+      console.log('✅ Todas las reservas han sido eliminadas');
+      alert('🦁 Todas las reservas del safari han sido eliminadas.');
+    } catch (error) {
+      console.error('❌ Error reseteando reservas:', error);
+      alert('Error al resetear. Intenta de nuevo.');
     }
   };
 
@@ -735,11 +822,11 @@ export default function BabyShowerGiftSelector() {
 
   const generateWhatsAppLink = () => {
     const reservedGifts = gifts.filter((gift) => gift.reserved);
-    const message = `🦁 *Resumen de Regalos Baby Shower - Maximiliano*\n\n${reservedGifts
+    const message = `🦁 *Resumen de Regalos Baby Shower Safari - Maximiliano*\n\n${reservedGifts
       .map((gift) => `• ${gift.reservedBy} (${gift.phone}): ${gift.gift}`)
       .join("\n")}\n\n📊 Total: ${stats.totalReserved} de ${
       stats.totalGifts
-    } regalos reservados`;
+    } regalos reservados\n\n🌿 ¡Gracias por ser parte de nuestra aventura safari!`;
 
     return `https://wa.me/?text=${encodeURIComponent(message)}`;
   };
@@ -749,7 +836,8 @@ export default function BabyShowerGiftSelector() {
       <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-amber-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-green-300 border-t-green-600 mx-auto mb-4"></div>
-          <p className="text-green-800 text-lg">Cargando regalos safari para Maximiliano...</p>
+          <p className="text-green-800 text-lg">🦁 Conectando con el safari de regalos...</p>
+          <p className="text-green-600 text-sm mt-2">⚡ Configurando tiempo real</p>
         </div>
       </div>
     );
@@ -757,6 +845,14 @@ export default function BabyShowerGiftSelector() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-amber-100 p-4">
+      {/* Indicador de tiempo real */}
+      <div className="fixed top-4 right-4 z-40">
+        <div className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-2 shadow-lg">
+          <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></div>
+          ⚡ Safari en Tiempo Real
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="bg-gradient-to-r from-green-700 to-yellow-600 text-white rounded-3xl p-8 text-center shadow-2xl mb-6">
@@ -945,6 +1041,12 @@ export default function BabyShowerGiftSelector() {
                         <strong>🛒 Tiendas:</strong> Alkosto, Falabella, Éxito, Pepe Ganga, D1, Ara
                       </span>
                     </p>
+                    <p className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                      <span>
+                        <strong>⚡ Tiempo Real:</strong> Se actualiza automáticamente en todos los dispositivos
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -954,7 +1056,7 @@ export default function BabyShowerGiftSelector() {
                   🦁 ¡Cada regalo incluye pañales según la etapa! 🌿
                 </h5>
                 <p className="text-center text-green-700">
-                  Los regalos están organizados por edades y cada uno incluye los pañales Winny correspondientes a esa etapa de crecimiento de Maximiliano.
+                  Los regalos están organizados por edades y cada uno incluye los pañales Winny correspondientes a esa etapa de crecimiento de Maximiliano. ¡Todo se sincroniza en tiempo real!
                 </p>
               </div>
 
