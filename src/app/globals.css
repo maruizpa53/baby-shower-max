@@ -26,7 +26,6 @@
   }
   
   body {
-    @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
   }
@@ -46,7 +45,7 @@
   }
   
   .input-field {
-    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 outline-none transition-all duration-300 text-gray-700;
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-sage focus:ring-4 focus:ring-green-50 outline-none transition-all duration-300 text-gray-700;
   }
 }
 
@@ -70,7 +69,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-pink-300 rounded-full hover:bg-pink-400 transition-colors;
+  @apply bg-sage-dark rounded-full hover:bg-sage transition-colors;
 }
 
 /* Focus styles */
