@@ -25,6 +25,7 @@ import {
   Phone,
   User,
   Info,
+  Tag,
 } from "lucide-react";
 
 interface Gift {
@@ -51,9 +52,9 @@ export default function BabyShowerGiftSelector() {
   const [phoneError, setPhoneError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Datos iniciales de regalos para inicializar Firebase
-const initialGifts = [
-    // ROPA Y ACCESORIOS
+  // Datos iniciales COMPLETOS de los 42 regalos
+  const initialGifts = [
+    // ROPA Y ACCESORIOS (11 items)
     {
       id: 1,
       category: "ROPA Y ACCESORIOS",
@@ -176,7 +177,7 @@ const initialGifts = [
       phone: "",
     },
 
-    // HIGIENE Y CUIDADO
+    // HIGIENE Y CUIDADO (5 items)
     {
       id: 12,
       category: "HIGIENE Y CUIDADO",
@@ -233,7 +234,7 @@ const initialGifts = [
       phone: "",
     },
 
-    // DORMITORIO Y DESCANSO
+    // DORMITORIO Y DESCANSO (5 items)
     {
       id: 17,
       category: "DORMITORIO Y DESCANSO",
@@ -290,7 +291,7 @@ const initialGifts = [
       phone: "",
     },
 
-    // ALIMENTACIÓN
+    // ALIMENTACIÓN (6 items)
     {
       id: 22,
       category: "ALIMENTACIÓN",
@@ -305,8 +306,8 @@ const initialGifts = [
     {
       id: 23,
       category: "ALIMENTACIÓN",
-      gift: "Conjunto para bebe (3-6) meses + Pañales Etapa 2",
-      description: "Conjunto para bebe (3-6) meses + Pañales Winny Etapa 2 (6-9kg)",
+      gift: "Conjunto para bebé (3-6) meses + Pañales Etapa 2",
+      description: "Conjunto para bebé (3-6) meses + Pañales Winny Etapa 2 (6-9kg)",
       brands: "EPK + Winny Etapa 2",
       store: "Falabella / Alkosto / Éxito",
       reserved: false,
@@ -316,7 +317,7 @@ const initialGifts = [
     {
       id: 24,
       category: "ALIMENTACIÓN",
-      gift: "Extractor de leche manual o automatico + Pañales Etapa 1",
+      gift: "Extractor de leche manual o automático + Pañales Etapa 1",
       description: "Extractor manual cómodo y eficiente + Pañales Winny Etapa 1 (4-7kg)",
       brands: "Medela + Winny Etapa 1",
       store: "Falabella / Alkosto / Éxito",
@@ -358,7 +359,7 @@ const initialGifts = [
       phone: "",
     },
 
-    // TRANSPORTE Y PASEO
+    // TRANSPORTE Y PASEO (2 items)
     {
       id: 28,
       category: "TRANSPORTE Y PASEO",
@@ -382,7 +383,7 @@ const initialGifts = [
       phone: "",
     },
 
-    // JUGUETES Y ESTIMULACIÓN
+    // JUGUETES Y ESTIMULACIÓN (8 items)
     {
       id: 30,
       category: "JUGUETES Y ESTIMULACIÓN",
@@ -420,7 +421,7 @@ const initialGifts = [
       id: 33,
       category: "JUGUETES Y ESTIMULACIÓN",
       gift: "Mordedoras avanzadas + Pañales Etapa 3",
-      description: "Mordederas con gel refrigerante y texturas + Pañales Winny Etapa 3 (8-12kg)",
+      description: "Mordedoras con gel refrigerante y texturas + Pañales Winny Etapa 3 (8-12kg)",
       brands: "MAM + Winny Etapa 3",
       store: "Falabella / Pepe Ganga / Éxito",
       reserved: false,
@@ -472,7 +473,7 @@ const initialGifts = [
       phone: "",
     },
 
-    // REGALOS ESPECIALES PREMIUM
+    // REGALOS ESPECIALES PREMIUM (5 items)
     {
       id: 38,
       category: "REGALOS ESPECIALES PREMIUM",
@@ -509,8 +510,8 @@ const initialGifts = [
     {
       id: 41,
       category: "REGALOS ESPECIALES PREMIUM",
-      gift: "Tina Bañera para Bebe",
-      description: "Tina Bañera para Bebe y termómetro infrarrojo",
+      gift: "Tina Bañera para Bebé",
+      description: "Tina Bañera para Bebé y termómetro infrarrojo",
       brands: "Safety 1st, Chicco",
       store: "Falabella / Alkosto / Éxito",
       reserved: false,
@@ -530,19 +531,166 @@ const initialGifts = [
     },
   ];
 
+  // Función para obtener el emoji de categoría
+  const getCategoryEmoji = (category: string) => {
+    switch (category) {
+      case "ROPA Y ACCESORIOS":
+        return "👕";
+      case "HIGIENE Y CUIDADO":
+        return "🧴";
+      case "DORMITORIO Y DESCANSO":
+        return "🛏️";
+      case "ALIMENTACIÓN":
+        return "🍼";
+      case "TRANSPORTE Y PASEO":
+        return "🚗";
+      case "JUGUETES Y ESTIMULACIÓN":
+        return "🧸";
+      case "REGALOS ESPECIALES PREMIUM":
+        return "⭐";
+      default:
+        return "🎁";
+    }
+  };
+
+  // Función para obtener el color de categoría
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "ROPA Y ACCESORIOS":
+        return "bg-blue-100 text-blue-700 border-blue-300";
+      case "HIGIENE Y CUIDADO":
+        return "bg-purple-100 text-purple-700 border-purple-300";
+      case "DORMITORIO Y DESCANSO":
+        return "bg-indigo-100 text-indigo-700 border-indigo-300";
+      case "ALIMENTACIÓN":
+        return "bg-pink-100 text-pink-700 border-pink-300";
+      case "TRANSPORTE Y PASEO":
+        return "bg-orange-100 text-orange-700 border-orange-300";
+      case "JUGUETES Y ESTIMULACIÓN":
+        return "bg-green-100 text-green-700 border-green-300";
+      case "REGALOS ESPECIALES PREMIUM":
+        return "bg-yellow-100 text-yellow-700 border-yellow-300";
+      default:
+        return "bg-gray-100 text-gray-700 border-gray-300";
+    }
+  };
+
+  // Función para obtener el color de borde de categoría
+  const getCategoryBorderColor = (category: string) => {
+    switch (category) {
+      case "ROPA Y ACCESORIOS":
+        return "border-blue-300";
+      case "HIGIENE Y CUIDADO":
+        return "border-purple-300";
+      case "DORMITORIO Y DESCANSO":
+        return "border-indigo-300";
+      case "ALIMENTACIÓN":
+        return "border-pink-300";
+      case "TRANSPORTE Y PASEO":
+        return "border-orange-300";
+      case "JUGUETES Y ESTIMULACIÓN":
+        return "border-green-300";
+      case "REGALOS ESPECIALES PREMIUM":
+        return "border-yellow-300";
+      default:
+        return "border-gray-300";
+    }
+  };
+
+  // Función para obtener el fondo de categoría
+  const getCategoryBackgroundColor = (category: string) => {
+    switch (category) {
+      case "ROPA Y ACCESORIOS":
+        return "bg-gradient-to-br from-blue-50 via-blue-25 to-white";
+      case "HIGIENE Y CUIDADO":
+        return "bg-gradient-to-br from-purple-50 via-purple-25 to-white";
+      case "DORMITORIO Y DESCANSO":
+        return "bg-gradient-to-br from-indigo-50 via-indigo-25 to-white";
+      case "ALIMENTACIÓN":
+        return "bg-gradient-to-br from-pink-50 via-pink-25 to-white";
+      case "TRANSPORTE Y PASEO":
+        return "bg-gradient-to-br from-orange-50 via-orange-25 to-white";
+      case "JUGUETES Y ESTIMULACIÓN":
+        return "bg-gradient-to-br from-green-50 via-green-25 to-white";
+      case "REGALOS ESPECIALES PREMIUM":
+        return "bg-gradient-to-br from-yellow-50 via-yellow-25 to-white";
+      default:
+        return "bg-gradient-to-br from-gray-50 via-gray-25 to-white";
+    }
+  };
+
+  // Función para obtener el estilo del header de categoría
+  const getCategoryHeaderStyle = (category: string) => {
+    switch (category) {
+      case "ROPA Y ACCESORIOS":
+        return "bg-gradient-to-r from-blue-200 to-blue-300 border-blue-400";
+      case "HIGIENE Y CUIDADO":
+        return "bg-gradient-to-r from-purple-200 to-purple-300 border-purple-400";
+      case "DORMITORIO Y DESCANSO":
+        return "bg-gradient-to-r from-indigo-200 to-indigo-300 border-indigo-400";
+      case "ALIMENTACIÓN":
+        return "bg-gradient-to-r from-pink-200 to-pink-300 border-pink-400";
+      case "TRANSPORTE Y PASEO":
+        return "bg-gradient-to-r from-orange-200 to-orange-300 border-orange-400";
+      case "JUGUETES Y ESTIMULACIÓN":
+        return "bg-gradient-to-r from-green-200 to-green-300 border-green-400";
+      case "REGALOS ESPECIALES PREMIUM":
+        return "bg-gradient-to-r from-yellow-200 to-yellow-300 border-yellow-400";
+      default:
+        return "bg-gradient-to-r from-gray-200 to-gray-300 border-gray-400";
+    }
+  };
+
   // Inicializar Firebase si es la primera vez
   const initializeFirestore = async () => {
     try {
       const giftsCollection = collection(db, 'gifts');
       const snapshot = await getDocs(giftsCollection);
       
-      if (snapshot.empty) {
-        // Primera vez - subir datos iniciales
-        console.log('🦁 Inicializando safari de regalos...');
-        for (const gift of initialGifts) {
-          await setDoc(doc(db, 'gifts', gift.id.toString()), gift);
-        }
+      console.log('🔍 Verificando estado de Firebase...');
+      console.log(`📊 Documentos encontrados: ${snapshot.docs.length}`);
+      
+      if (snapshot.empty || snapshot.docs.length < initialGifts.length) {
+        // Reinicializar todos los datos
+        console.log('🦁 Inicializando/Actualizando safari de regalos...');
+        console.log(`📋 Total de regalos a inicializar: ${initialGifts.length}`);
+        
+        // Subir todos los regalos en batch para mejor performance
+        const promises = initialGifts.map(async (gift) => {
+          try {
+            await setDoc(doc(db, 'gifts', gift.id.toString()), gift);
+            console.log(`✅ Regalo ${gift.id} guardado: ${gift.gift.substring(0, 30)}...`);
+          } catch (error) {
+            console.error(`❌ Error guardando regalo ${gift.id}:`, error);
+          }
+        });
+        
+        await Promise.all(promises);
+        
         console.log('✅ Safari de regalos inicializado exitosamente!');
+        console.log(`📊 Total de regalos inicializados: ${initialGifts.length}`);
+        
+        // Verificar categorías
+        const categories = [...new Set(initialGifts.map(gift => gift.category))];
+        console.log('🏷️ Categorías inicializadas:', categories);
+        categories.forEach(cat => {
+          const count = initialGifts.filter(gift => gift.category === cat).length;
+          console.log(`  ${getCategoryEmoji(cat)} ${cat}: ${count} regalos`);
+        });
+      } else {
+        console.log(`📊 Safari ya inicializado con ${snapshot.docs.length} regalos`);
+        
+        // Debug categorías existentes
+        const existingGifts = snapshot.docs.map(doc => doc.data());
+        const existingCategories = [...new Set(existingGifts.map(gift => gift.category))];
+        console.log('🏷️ Categorías existentes:', existingCategories);
+        
+        // Verificar si hay regalos sin categoría o con categorías incorrectas
+        existingGifts.forEach(gift => {
+          if (!gift.category || typeof gift.category !== 'string') {
+            console.warn(`⚠️ Regalo sin categoría válida:`, gift);
+          }
+        });
       }
     } catch (error) {
       console.error('❌ Error inicializando Firestore:', error);
@@ -556,16 +704,45 @@ const initialGifts = [
     const unsubscribe = onSnapshot(
       collection(db, 'gifts'),
       (snapshot) => {
-        const giftsData = snapshot.docs.map(doc => ({
-          ...doc.data(),
-          id: parseInt(doc.id)
-        })) as Gift[];
+        console.log(`📡 Snapshot recibido: ${snapshot.docs.length} documentos`);
+        
+        const giftsData = snapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            ...data,
+            id: parseInt(doc.id)
+          };
+        }) as Gift[];
         
         // Ordenar por ID
         giftsData.sort((a, b) => a.id - b.id);
+        
+        // Debug detallado
+        console.log(`📊 Datos procesados: ${giftsData.length} regalos`);
+        
+        // Verificar todas las categorías
+        const categories = [...new Set(giftsData.map(gift => gift.category))];
+        console.log('🏷️ Categorías encontradas:', categories);
+        console.log('📋 Resumen detallado por categoría:');
+        categories.forEach(cat => {
+          const categoryGifts = giftsData.filter(gift => gift.category === cat);
+          const count = categoryGifts.length;
+          console.log(`  ${getCategoryEmoji(cat)} ${cat}: ${count} regalos`);
+          
+          // Mostrar IDs de cada categoría para debug
+          const ids = categoryGifts.map(g => g.id).sort((a, b) => a - b);
+          console.log(`    📌 IDs: ${ids.join(', ')}`);
+        });
+        
+        // Verificar si hay regalos sin categoría
+        const withoutCategory = giftsData.filter(gift => !gift.category || gift.category.trim() === '');
+        if (withoutCategory.length > 0) {
+          console.warn('⚠️ Regalos sin categoría:', withoutCategory);
+        }
+        
         setGifts(giftsData);
         setIsLoading(false);
-        console.log('📊 Datos actualizados en tiempo real');
+        console.log(`✅ Estado actualizado - Total: ${giftsData.length} regalos cargados`);
       },
       (error) => {
         console.error('❌ Error escuchando cambios:', error);
@@ -641,7 +818,6 @@ const initialGifts = [
       setPhoneError("");
       
       console.log('✅ Regalo reservado exitosamente!');
-      // Opcional: mostrar notificación de éxito
       alert('🦁 ¡Regalo reservado exitosamente para el safari de Maximiliano! 🎁');
     } catch (error) {
       console.error('❌ Error reservando regalo:', error);
@@ -651,6 +827,10 @@ const initialGifts = [
 
   // Cancelar reserva en Firebase
   const handleCancelReservation = async (giftId: number) => {
+    if (!window.confirm("¿Estás seguro de que quieres cancelar esta reserva?")) {
+      return;
+    }
+
     try {
       console.log(`🔄 Cancelando reserva del regalo ID: ${giftId}`);
       const giftRef = doc(db, 'gifts', giftId.toString());
@@ -694,8 +874,50 @@ const initialGifts = [
     }
   };
 
+  // Función para reinicializar todos los datos de Firebase
+  const forceReinitialize = async () => {
+    if (!window.confirm("🔄 ¿Estás seguro de que quieres reinicializar TODOS los datos del safari? Esto borrará todas las reservas y recargará los 42 regalos.")) {
+      return;
+    }
+
+    try {
+      console.log('🔄 Reinicializando todos los datos...');
+      setIsLoading(true);
+      
+      // Borrar todos los documentos existentes
+      const giftsCollection = collection(db, 'gifts');
+      const snapshot = await getDocs(giftsCollection);
+      
+      console.log(`🗑️ Borrando ${snapshot.docs.length} documentos existentes...`);
+      const deletePromises = snapshot.docs.map(docSnapshot => 
+        updateDoc(doc(db, 'gifts', docSnapshot.id), {
+          reserved: false,
+          reservedBy: "",
+          phone: "",
+        })
+      );
+      await Promise.all(deletePromises);
+      
+      // Reinicializar con datos frescos
+      console.log('📝 Subiendo datos frescos...');
+      const uploadPromises = initialGifts.map(async (gift) => {
+        await setDoc(doc(db, 'gifts', gift.id.toString()), gift);
+      });
+      await Promise.all(uploadPromises);
+      
+      console.log('✅ Reinicialización completa exitosa!');
+      alert('🦁 Safari de regalos reinicializado exitosamente! Todas las categorías deberían aparecer ahora.');
+      
+    } catch (error) {
+      console.error('❌ Error en reinicialización:', error);
+      alert('Error al reinicializar. Intenta de nuevo.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const filteredGifts = useMemo(() => {
-    return gifts.filter((gift) => {
+    const filtered = gifts.filter((gift) => {
       const matchesSearch =
         gift.gift.toLowerCase().includes(searchTerm.toLowerCase()) ||
         gift.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -706,22 +928,53 @@ const initialGifts = [
 
       return matchesSearch && matchesFilter;
     });
+
+    console.log(`🔍 Filtrados: ${filtered.length} de ${gifts.length} regalos`);
+    
+    // Debug de categorías en filtrados
+    const filteredCategories = [...new Set(filtered.map(gift => gift.category))];
+    console.log('🏷️ Categorías en filtrados:', filteredCategories);
+    
+    return filtered;
   }, [gifts, searchTerm, showReserved]);
 
   const groupedGifts = useMemo(() => {
-    return filteredGifts.reduce((acc, gift) => {
+    const grouped = filteredGifts.reduce((acc, gift) => {
       if (!acc[gift.category]) {
         acc[gift.category] = [];
       }
       acc[gift.category].push(gift);
       return acc;
     }, {} as Record<string, Gift[]>);
+
+    console.log('📊 Agrupados por categoría:', Object.keys(grouped));
+    Object.entries(grouped).forEach(([cat, gifts]) => {
+      console.log(`  ${getCategoryEmoji(cat)} ${cat}: ${gifts.length} regalos`);
+    });
+
+    // Verificar que tenemos las 7 categorías esperadas
+    const expectedCategories = [
+      "ROPA Y ACCESORIOS",
+      "HIGIENE Y CUIDADO", 
+      "DORMITORIO Y DESCANSO",
+      "ALIMENTACIÓN",
+      "TRANSPORTE Y PASEO",
+      "JUGUETES Y ESTIMULACIÓN",
+      "REGALOS ESPECIALES PREMIUM"
+    ];
+    
+    const missingCategories = expectedCategories.filter(cat => !Object.keys(grouped).includes(cat));
+    if (missingCategories.length > 0) {
+      console.warn('⚠️ Categorías faltantes:', missingCategories);
+    }
+
+    return grouped;
   }, [filteredGifts]);
 
   const stats = useMemo(() => {
     const totalReserved = gifts.filter((gift) => gift.reserved).length;
     const totalGifts = gifts.length;
-    const percentage = Math.round((totalReserved / totalGifts) * 100);
+    const percentage = totalGifts > 0 ? Math.round((totalReserved / totalGifts) * 100) : 0;
     return { totalReserved, totalGifts, percentage };
   }, [gifts]);
 
@@ -756,229 +1009,294 @@ const initialGifts = [
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-amber-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-amber-100 p-2 sm:p-4">
       {/* Indicador de tiempo real */}
-      <div className="fixed top-4 right-4 z-40">
-        <div className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-2 shadow-lg">
+      <div className="fixed top-2 right-2 sm:top-4 sm:right-4 z-40">
+        <div className="bg-green-600 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium flex items-center gap-1 sm:gap-2 shadow-lg">
           <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></div>
-          ⚡ Safari en Tiempo Real
+          <span className="hidden sm:inline">⚡ Safari en Tiempo Real</span>
+          <span className="sm:hidden">⚡ Live</span>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-green-700 to-yellow-600 text-white rounded-3xl p-8 text-center shadow-2xl mb-6">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Gift className="w-10 h-10 animate-bounce" />
-            <h1 className="text-4xl font-bold">
+        <div className="bg-gradient-to-r from-green-700 to-yellow-600 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 text-center shadow-2xl mb-4 sm:mb-6">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+            <Gift className="w-6 sm:w-10 h-6 sm:h-10 animate-bounce" />
+            <h1 className="text-2xl sm:text-4xl font-bold">
               🦁 Baby Shower Safari - Maximiliano 🐾
             </h1>
-            <Heart className="w-10 h-10 animate-pulse text-yellow-300" />
+            <Heart className="w-6 sm:w-10 h-6 sm:h-10 animate-pulse text-yellow-300" />
           </div>
 
-          <p className="text-xl opacity-90 mb-6">
+          <p className="text-sm sm:text-xl opacity-90 mb-4 sm:mb-6">
             🎁 Aventura Safari: Regalos únicos pensando en tu presupuesto 🌿
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4">
               <div className="flex items-center justify-center gap-2">
-                <Users className="w-6 h-6 text-green-300" />
-                <span className="font-semibold text-lg">
+                <Users className="w-4 sm:w-6 h-4 sm:h-6 text-green-300" />
+                <span className="font-semibold text-sm sm:text-lg">
                   {stats.totalGifts - stats.totalReserved} Disponibles
                 </span>
               </div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4">
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4">
               <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="w-6 h-6 text-yellow-300" />
-                <span className="font-semibold text-lg">
+                <CheckCircle className="w-4 sm:w-6 h-4 sm:h-6 text-yellow-300" />
+                <span className="font-semibold text-sm sm:text-lg">
                   {stats.totalReserved} Reservados
                 </span>
               </div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-4">
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4">
               <div className="flex items-center justify-center gap-2">
-                <BarChart3 className="w-6 h-6 text-amber-300" />
-                <span className="font-semibold text-lg">
+                <BarChart3 className="w-4 sm:w-6 h-4 sm:h-6 text-amber-300" />
+                <span className="font-semibold text-sm sm:text-lg">
                   {stats.percentage}% Completado
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/20 rounded-full h-4 mb-2 overflow-hidden">
+          <div className="bg-white/20 rounded-full h-3 sm:h-4 mb-2 overflow-hidden">
             <div
               className="bg-gradient-to-r from-green-400 to-yellow-500 h-full transition-all duration-1000 ease-out"
               style={{ width: `${stats.percentage}%` }}
             ></div>
           </div>
-          <p className="text-sm opacity-90">Progreso de nuestra aventura safari 🦁</p>
+          <p className="text-xs sm:text-sm opacity-90">Progreso de nuestra aventura safari 🦁</p>
         </div>
 
         {/* Controls */}
-        <div className="bg-amber-50 rounded-3xl shadow-xl p-6 mb-6 border-2 border-green-200">
-          <div className="flex flex-col lg:flex-row gap-4 mb-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-green-600 w-5 h-5" />
+        <div className="bg-amber-50 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 border-2 border-green-200">
+          <div className="flex flex-col gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <div className="relative">
+              <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-green-600 w-4 sm:w-5 h-4 sm:h-5" />
               <input
                 type="text"
                 placeholder="🔍 Buscar regalo, marca, categoría..."
-                className="w-full pl-12 pr-4 py-3 border-2 border-green-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-lg bg-white"
+                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 border-2 border-green-300 rounded-lg sm:rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-sm sm:text-lg bg-white"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               <button
                 onClick={() => setShowInstructions(true)}
-                className="flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-xl font-medium hover:bg-amber-700 transition-all shadow-lg"
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-amber-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-amber-700 transition-all shadow-lg text-xs sm:text-sm"
               >
-                <Info className="w-4 h-4" />
-                📋 Instrucciones
+                <Info className="w-3 sm:w-4 h-3 sm:h-4" />
+                📋 <span className="hidden sm:inline">Instrucciones</span><span className="sm:hidden">Info</span>
               </button>
               <button
                 onClick={() => setShowReserved(!showReserved)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
+                className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium transition-all text-xs sm:text-sm ${
                   showReserved
                     ? "bg-green-600 text-white hover:bg-green-700 shadow-lg"
                     : "bg-green-100 text-green-700 hover:bg-green-200"
                 }`}
               >
-                <Filter className="w-4 h-4" />
+                <Filter className="w-3 sm:w-4 h-3 sm:h-4" />
                 {showReserved ? "✅ Reservados" : "📋 Disponibles"}
               </button>
               <button
                 onClick={() => setShowSummary(!showSummary)}
-                className="flex items-center gap-2 px-6 py-3 bg-yellow-600 text-white rounded-xl font-medium hover:bg-yellow-700 transition-all shadow-lg"
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-yellow-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-yellow-700 transition-all shadow-lg text-xs sm:text-sm"
               >
-                <BarChart3 className="w-4 h-4" />
-                📊 Resumen
+                <BarChart3 className="w-3 sm:w-4 h-3 sm:h-4" />
+                📊 <span className="hidden sm:inline">Resumen</span>
               </button>
-{/*               <button
+              <button
                 onClick={resetAllReservations}
-                className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-medium hover:bg-red-700 transition-all shadow-lg"
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-red-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-red-700 transition-all shadow-lg text-xs sm:text-sm"
                 title="Reiniciar todas las reservas"
               >
-                <RefreshCw className="w-4 h-4" />
-                🔄 Reset
-              </button> */}
+                <RefreshCw className="w-3 sm:w-4 h-3 sm:h-4" />
+                🔄 <span className="hidden sm:inline">Reset</span>
+              </button>
+              <button
+                onClick={forceReinitialize}
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-purple-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-purple-700 transition-all shadow-lg text-xs sm:text-sm"
+                title="Reinicializar todos los datos del safari"
+              >
+                <RefreshCw className="w-3 sm:w-4 h-3 sm:h-4" />
+                🔧 <span className="hidden sm:inline">Reinicializar</span><span className="sm:hidden">Fix</span>
+              </button>
             </div>
+          </div>
+
+          {/* Debug Info */}
+          <div className="text-center text-xs sm:text-sm text-green-600">
+            <p>📊 Total: {gifts.length} | Mostrando: {filteredGifts.length} | Categorías: {Object.keys(groupedGifts).length}</p>
+            <p className="mt-1">
+              🏷️ Categorías activas: {Object.keys(groupedGifts).map(cat => getCategoryEmoji(cat)).join(' ')}
+            </p>
+            {gifts.length !== 42 && (
+              <p className="text-orange-600 font-semibold mt-1">
+                ⚠️ Se esperan 42 regalos, pero solo hay {gifts.length}. Usa el botón "Reinicializar" si es necesario.
+              </p>
+            )}
           </div>
         </div>
 
         {/* Instructions Modal */}
         {showInstructions && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-amber-50 rounded-3xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-green-300">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-3xl font-bold text-green-800 flex items-center gap-2">
-                  🦁 Instrucciones Safari - Baby Shower Maximiliano
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-2 sm:p-4 z-50 backdrop-blur-lg">
+            <div className="bg-gradient-to-br from-amber-50 via-green-50 to-yellow-50 rounded-3xl sm:rounded-3xl p-6 sm:p-10 max-w-lg sm:max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-gradient-to-r from-green-400 to-yellow-400 relative">
+              {/* Decorative Elements */}
+              <div className="absolute top-4 left-4 text-2xl sm:text-4xl animate-bounce">🦁</div>
+              <div className="absolute top-4 right-16 text-xl sm:text-3xl animate-pulse">🌿</div>
+              <div className="absolute bottom-4 left-6 text-lg sm:text-2xl animate-bounce delay-100">🐾</div>
+              <div className="absolute bottom-4 right-4 text-xl sm:text-3xl animate-pulse delay-200">🎁</div>
+              
+              <div className="flex justify-between items-center mb-6 sm:mb-8">
+                <h3 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-green-700 to-yellow-600 bg-clip-text text-transparent flex items-center gap-3">
+                  ✨ Bienvenidos al Safari de Maximiliano ✨
                 </h3>
                 <button
                   onClick={() => setShowInstructions(false)}
-                  className="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100 transition-all"
+                  className="text-green-600 hover:text-green-800 p-2 sm:p-3 rounded-full hover:bg-green-100 transition-all shadow-lg bg-white/80"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 sm:w-8 h-6 sm:h-8" />
                 </button>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8 text-left">
-                <div className="space-y-4">
-                  <h5 className="text-lg font-bold text-green-700 flex items-center gap-2">
-                    <Gift className="w-5 h-5" />
-                    🐾 Cómo funciona:
+              {/* Hero Section */}
+              <div className="text-center mb-8 sm:mb-10">
+                <div className="bg-gradient-to-r from-green-600 to-yellow-500 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+                  <h4 className="text-xl sm:text-3xl font-bold mb-4">🦁 ¡Únete a Nuestra Aventura Safari! 🌿</h4>
+                  <p className="text-sm sm:text-lg opacity-90 leading-relaxed">
+                    Ayúdanos a preparar todo lo necesario para la llegada de nuestro pequeño explorador. 
+                    <br className="hidden sm:block" />
+                    ¡Cada regalo es una pieza especial de su aventura! 🐾
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 sm:gap-8 text-left">
+                {/* Cómo Funciona */}
+                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border-2 border-green-200 shadow-lg">
+                  <h5 className="text-lg sm:text-2xl font-bold text-green-700 flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                      <Gift className="w-5 h-5 text-white" />
+                    </div>
+                    🐾 Cómo Funciona
                   </h5>
-                  <div className="space-y-3 text-sm text-green-800">
-                    <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                  <div className="space-y-4 text-sm sm:text-base text-green-800">
+                    <div className="flex items-start gap-4 bg-green-50 p-4 rounded-xl">
+                      <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-green-700 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                         1
                       </div>
-                      <p>Explora y selecciona el regalo que quieres dar</p>
+                      <div>
+                        <p className="font-semibold">Explora los Regalos</p>
+                        <p className="text-sm opacity-80">Navega por las categorías y encuentra el regalo perfecto</p>
+                      </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                    <div className="flex items-start gap-4 bg-yellow-50 p-4 rounded-xl">
+                      <div className="w-8 h-8 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                         2
                       </div>
-                      <p>Escribe tu nombre completo</p>
+                      <div>
+                        <p className="font-semibold">Ingresa tus Datos</p>
+                        <p className="text-sm opacity-80">Comparte tu nombre y teléfono para coordinar</p>
+                      </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
+                    <div className="flex items-start gap-4 bg-green-50 p-4 rounded-xl">
+                      <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-green-700 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                         3
                       </div>
-                      <p>Ingresa tu número de celular</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs mt-0.5">
-                        4
+                      <div>
+                        <p className="font-semibold">¡Reserva Confirmada!</p>
+                        <p className="text-sm opacity-80">Tu regalo queda apartado y todos lo verán en tiempo real</p>
                       </div>
-                      <p>Confirma la reserva ¡y listo!</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <h5 className="text-lg font-bold text-amber-700 flex items-center gap-2">
-                    <Star className="w-5 h-5" />
-                    🌿 Información importante:
+                {/* Información Importante */}
+                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border-2 border-yellow-200 shadow-lg">
+                  <h5 className="text-lg sm:text-2xl font-bold text-yellow-700 flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center">
+                      <Star className="w-5 h-5 text-white" />
+                    </div>
+                    🌟 Información Clave
                   </h5>
-                  <div className="space-y-3 text-sm text-green-800">
-                    <p className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>
-                        <strong>📦 Etapas Winny:</strong> 0 (hasta 4.5kg) → 1 (4-7kg) → 2 (6-9kg) → 3 (8-12kg) → 4 (10-16kg)
-                      </span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span>
-                        <strong>🏷️ Pañales recomendados:</strong> Winny, Pampers
-                      </span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>
-                        <strong>🔒 Una vez reservado, nadie más podrá elegir ese regalo</strong>
-                      </span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                      <span>
-                        <strong>📞 Tu teléfono será visible para coordinación</strong>
-                      </span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>
-                        <strong>🛒 Tiendas:</strong> Alkosto, Falabella, Éxito, Pepe Ganga, D1, Ara
-                      </span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span>
-                        <strong>⚡ Tiempo Real:</strong> Se actualiza automáticamente en todos los dispositivos
-                      </span>
-                    </p>
+                  <div className="space-y-3 text-sm sm:text-base text-yellow-800">
+                    <div className="flex items-center gap-3 bg-yellow-50 p-3 rounded-xl">
+                      <div className="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></div>
+                      <span><strong>📦 Pañales Winny:</strong> Cada regalo incluye la etapa correspondiente</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-green-50 p-3 rounded-xl">
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full flex-shrink-0"></div>
+                      <span><strong>🏷️ Categorías:</strong> 7 secciones organizadas con emojis</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-blue-50 p-3 rounded-xl">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full flex-shrink-0"></div>
+                      <span><strong>🔒 Reservas:</strong> Una vez elegido, nadie más podrá tomarlo</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-purple-50 p-3 rounded-xl">
+                      <div className="w-3 h-3 bg-purple-500 rounded-full flex-shrink-0"></div>
+                      <span><strong>⚡ Tiempo Real:</strong> Se actualiza instantáneamente</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-orange-50 p-3 rounded-xl">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full flex-shrink-0"></div>
+                      <span><strong>🛒 Tiendas:</strong> Alkosto, Falabella, Éxito, Pepe Ganga</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-gradient-to-r from-green-100 to-yellow-100 rounded-2xl border-2 border-green-300">
-                <h5 className="text-lg font-bold text-green-800 mb-4 text-center">
-                  🦁 ¡Cada regalo incluye pañales según la etapa! 🌿
+              {/* Categories Preview */}
+              <div className="mt-8 bg-gradient-to-r from-green-100 via-yellow-100 to-amber-100 rounded-2xl p-6 border-2 border-green-300">
+                <h5 className="text-lg sm:text-2xl font-bold text-green-800 mb-6 text-center flex items-center justify-center gap-3">
+                  <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-yellow-500 rounded-full flex items-center justify-center">
+                    <Tag className="w-4 h-4 text-white" />
+                  </div>
+                  🎁 42 Regalos en 7 Categorías Safari 🌿
                 </h5>
-                <p className="text-center text-green-700">
-                  Los regalos están organizados por edades y cada uno incluye los pañales Winny correspondientes a esa etapa de crecimiento de Maximiliano. ¡Todo se sincroniza en tiempo real!
-                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="bg-blue-100 p-3 rounded-xl text-center border-2 border-blue-200">
+                    <div className="text-2xl mb-2">👕</div>
+                    <p className="text-xs sm:text-sm font-bold text-blue-700">Ropa & Accesorios</p>
+                  </div>
+                  <div className="bg-purple-100 p-3 rounded-xl text-center border-2 border-purple-200">
+                    <div className="text-2xl mb-2">🧴</div>
+                    <p className="text-xs sm:text-sm font-bold text-purple-700">Higiene & Cuidado</p>
+                  </div>
+                  <div className="bg-indigo-100 p-3 rounded-xl text-center border-2 border-indigo-200">
+                    <div className="text-2xl mb-2">🛏️</div>
+                    <p className="text-xs sm:text-sm font-bold text-indigo-700">Dormitorio</p>
+                  </div>
+                  <div className="bg-pink-100 p-3 rounded-xl text-center border-2 border-pink-200">
+                    <div className="text-2xl mb-2">🍼</div>
+                    <p className="text-xs sm:text-sm font-bold text-pink-700">Alimentación</p>
+                  </div>
+                  <div className="bg-orange-100 p-3 rounded-xl text-center border-2 border-orange-200">
+                    <div className="text-2xl mb-2">🚗</div>
+                    <p className="text-xs sm:text-sm font-bold text-orange-700">Transporte</p>
+                  </div>
+                  <div className="bg-green-100 p-3 rounded-xl text-center border-2 border-green-200">
+                    <div className="text-2xl mb-2">🧸</div>
+                    <p className="text-xs sm:text-sm font-bold text-green-700">Juguetes</p>
+                  </div>
+                  <div className="bg-yellow-100 p-3 rounded-xl text-center border-2 border-yellow-200 sm:col-span-2">
+                    <div className="text-2xl mb-2">⭐</div>
+                    <p className="text-xs sm:text-sm font-bold text-yellow-700">Regalos Premium</p>
+                  </div>
+                </div>
               </div>
 
-              <div className="text-center mt-6">
+              <div className="text-center mt-8">
                 <button
                   onClick={() => setShowInstructions(false)}
-                  className="bg-green-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg"
+                  className="bg-gradient-to-r from-green-600 to-yellow-500 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-2xl font-bold hover:from-green-700 hover:to-yellow-600 transition-all shadow-xl text-lg sm:text-xl transform hover:scale-105"
                 >
-                  🦁 ¡Entendido! Comenzar Safari
+                  🦁 ¡Comenzar Safari de Regalos! 🎁
                 </button>
+                <p className="text-sm text-green-600 mt-3 opacity-80">¡Gracias por ser parte de nuestra aventura! 🌿</p>
               </div>
             </div>
           </div>
@@ -986,40 +1304,41 @@ const initialGifts = [
 
         {/* Summary Modal */}
         {showSummary && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-amber-50 rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border-4 border-green-300">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-3xl font-bold text-green-800 flex items-center gap-2">
-                  <BarChart3 className="w-8 h-8 text-green-600" />
-                  Resumen Safari de Regalos
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-2 sm:p-4 z-50 backdrop-blur-sm">
+            <div className="bg-amber-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-sm sm:max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border-4 border-green-300">
+              <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <h3 className="text-xl sm:text-3xl font-bold text-green-800 flex items-center gap-2">
+                  <BarChart3 className="w-6 sm:w-8 h-6 sm:h-8 text-green-600" />
+                  <span className="hidden sm:inline">Resumen Safari</span>
+                  <span className="sm:hidden">Resumen</span>
                 </h3>
                 <button
                   onClick={() => setShowSummary(false)}
-                  className="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100 transition-all"
+                  className="text-green-600 hover:text-green-800 p-1 sm:p-2 rounded-full hover:bg-green-100 transition-all"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 sm:w-6 h-5 sm:h-6" />
                 </button>
               </div>
 
-              <div className="bg-green-50 p-6 rounded-2xl mb-6 border-2 border-green-200">
-                <pre className="whitespace-pre-wrap text-sm text-green-800 font-mono">
+              <div className="bg-green-50 p-3 sm:p-6 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 border-2 border-green-200">
+                <pre className="whitespace-pre-wrap text-xs sm:text-sm text-green-800 font-mono">
                   {generateSummary() || "No hay reservas aún..."}
                 </pre>
               </div>
 
-              <div className="text-center space-y-4">
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-green-100 p-4 rounded-xl border-2 border-green-300">
-                    <p className="text-2xl font-bold text-green-700">
+              <div className="text-center space-y-3 sm:space-y-4">
+                <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                  <div className="bg-green-100 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 border-green-300">
+                    <p className="text-xl sm:text-2xl font-bold text-green-700">
                       {stats.totalReserved}
                     </p>
-                    <p className="text-sm text-green-600">Reservados</p>
+                    <p className="text-xs sm:text-sm text-green-600">Reservados</p>
                   </div>
-                  <div className="bg-yellow-100 p-4 rounded-xl border-2 border-yellow-300">
-                    <p className="text-2xl font-bold text-yellow-700">
+                  <div className="bg-yellow-100 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 border-yellow-300">
+                    <p className="text-xl sm:text-2xl font-bold text-yellow-700">
                       {stats.totalGifts - stats.totalReserved}
                     </p>
-                    <p className="text-sm text-yellow-600">Disponibles</p>
+                    <p className="text-xs sm:text-sm text-yellow-600">Disponibles</p>
                   </div>
                 </div>
 
@@ -1028,9 +1347,9 @@ const initialGifts = [
                     href={generateWhatsAppLink()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition-all shadow-lg"
+                    className="inline-flex items-center gap-2 bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium hover:bg-green-700 transition-all shadow-lg text-xs sm:text-sm"
                   >
-                    <Share2 className="w-5 h-5" />
+                    <Share2 className="w-4 sm:w-5 h-4 sm:h-5" />
                     📱 Compartir por WhatsApp
                   </a>
                 )}
@@ -1039,121 +1358,153 @@ const initialGifts = [
           </div>
         )}
 
-        {/* Gift List */}
-        <div className="space-y-8">
+        {/* Gift List - Categorías Independientes */}
+        <div className="space-y-8 sm:space-y-12">
           {Object.keys(groupedGifts).length === 0 ? (
-            <div className="text-center py-16 bg-amber-50 rounded-3xl shadow-lg border-2 border-green-200">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-green-700 mb-2">
-                No se encontraron regalos
+            <div className="text-center py-12 sm:py-16 bg-amber-50 rounded-2xl sm:rounded-3xl shadow-lg border-2 border-green-200">
+              <div className="text-4xl sm:text-6xl mb-4">🔍</div>
+              <h3 className="text-xl sm:text-2xl font-bold text-green-700 mb-2">
+                {gifts.length === 0 ? "Conectando con Firebase..." : "No se encontraron regalos"}
               </h3>
-              <p className="text-green-600">
-                Intenta con otro término de búsqueda
+              <p className="text-green-600 text-sm sm:text-base">
+                {gifts.length === 0 
+                  ? "Verifica tu conexión a Firebase" 
+                  : "Intenta con otro término de búsqueda"
+                }
               </p>
             </div>
           ) : (
-            Object.entries(groupedGifts).map(([category, categoryGifts]) => (
+            Object.entries(groupedGifts).map(([category, categoryGifts], index) => (
               <div
                 key={category}
-                className="bg-amber-50 rounded-3xl shadow-xl p-8 border-2 border-green-200"
+                className="relative"
               >
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-green-200">
-                  <Star className="w-6 h-6 text-yellow-600" />
-                  <h3 className="text-2xl font-bold text-green-800">
-                    {category}
-                  </h3>
-                  <span className="bg-green-200 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
-                    {categoryGifts.length} regalo
-                    {categoryGifts.length !== 1 ? "s" : ""}
-                  </span>
-                </div>
+                {/* Separador Visual entre Categorías */}
+                {index > 0 && (
+                  <div className="flex items-center justify-center mb-8 sm:mb-12">
+                    <div className="flex-1 h-1 bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
+                    <div className="mx-4 text-2xl sm:text-3xl">🌿</div>
+                    <div className="flex-1 h-1 bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
+                  </div>
+                )}
+                
+                {/* Sección de Categoría */}
+                <div className={`rounded-3xl shadow-2xl p-6 sm:p-10 border-4 transform transition-all duration-500 hover:scale-[1.02] ${getCategoryBorderColor(category)} ${getCategoryBackgroundColor(category)}`}>
+                  {/* Header de Categoría */}
+                  <div className="text-center mb-8 sm:mb-10">
+                    <div className={`inline-flex items-center gap-4 px-6 sm:px-8 py-4 sm:py-6 rounded-2xl shadow-xl border-3 ${getCategoryHeaderStyle(category)}`}>
+                      <div className="text-4xl sm:text-6xl animate-bounce">
+                        {getCategoryEmoji(category)}
+                      </div>
+                      <div className="text-left">
+                        <h3 className="text-xl sm:text-3xl font-bold text-gray-800">
+                          {category}
+                        </h3>
+                        <span className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full text-sm sm:text-base font-semibold bg-white/80 text-gray-700 shadow-md">
+                          <Star className="w-4 h-4" />
+                          {categoryGifts.length} regalo{categoryGifts.length !== 1 ? "s" : ""}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {categoryGifts.map((gift) => (
-                    <div
-                      key={gift.id}
-                      className={`relative group rounded-2xl border-2 transition-all duration-300 overflow-hidden ${
-                        gift.reserved
-                          ? "border-green-500 bg-green-100 shadow-lg"
-                          : selectedGift?.id === gift.id
-                          ? "border-yellow-500 bg-yellow-100 shadow-xl scale-105"
-                          : "border-green-300 bg-white hover:border-yellow-500 hover:shadow-xl hover:scale-105 cursor-pointer"
-                      }`}
-                      onClick={() => !gift.reserved && handleSelectGift(gift)}
-                    >
-                      <div className="p-6 h-full flex flex-col">
-                        <div className="flex-1 space-y-3">
-                          <h4
-                            className={`font-bold text-lg leading-tight ${
-                              gift.reserved ? "text-green-800" : "text-green-900"
-                            }`}
-                          >
-                            🎁 {gift.gift}
-                          </h4>
+                  {/* Grid de Regalos */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    {categoryGifts.map((gift) => (
+                      <div
+                        key={gift.id}
+                        className={`relative group rounded-xl sm:rounded-2xl border-2 transition-all duration-300 overflow-hidden ${
+                          gift.reserved
+                            ? "border-green-500 bg-green-100 shadow-lg"
+                            : selectedGift?.id === gift.id
+                            ? "border-yellow-500 bg-yellow-100 shadow-xl scale-105"
+                            : "border-green-300 bg-white hover:border-yellow-500 hover:shadow-xl hover:scale-105 cursor-pointer"
+                        }`}
+                        onClick={() => !gift.reserved && handleSelectGift(gift)}
+                      >
+                        <div className="p-3 sm:p-6 h-full flex flex-col">
+                          {/* Categoría Badge */}
+                          <div className="mb-3 sm:mb-4">
+                            <span className={`inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 rounded-full text-xs font-medium border ${getCategoryColor(gift.category)}`}>
+                              <Tag className="w-3 h-3" />
+                              <span className="hidden sm:inline">{getCategoryEmoji(gift.category)} {gift.category}</span>
+                              <span className="sm:hidden">{getCategoryEmoji(gift.category)}</span>
+                            </span>
+                          </div>
 
-                          <p className="text-sm text-green-700 leading-relaxed">
-                            {gift.description}
-                          </p>
+                          <div className="flex-1 space-y-2 sm:space-y-3">
+                            <h4
+                              className={`font-bold text-sm sm:text-lg leading-tight ${
+                                gift.reserved ? "text-green-800" : "text-green-900"
+                              }`}
+                            >
+                              🎁 {gift.gift}
+                            </h4>
 
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                              <p className="text-xs font-medium text-green-700">
-                                🏪 {gift.store}
-                              </p>
+                            <p className="text-xs sm:text-sm text-green-700 leading-relaxed">
+                              {gift.description}
+                            </p>
+
+                            <div className="space-y-1 sm:space-y-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                                <p className="text-xs font-medium text-green-700">
+                                  🏪 {gift.store}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
+                                <p className="text-xs italic text-yellow-700">
+                                  {gift.brands}
+                                </p>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
-                              <p className="text-xs italic text-yellow-700">
-                                {gift.brands}
-                              </p>
-                            </div>
+                          </div>
+
+                          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-green-200">
+                            {gift.reserved ? (
+                              <div className="space-y-2 sm:space-y-3">
+                                <div className="bg-green-600 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl text-center text-xs sm:text-sm font-medium">
+                                  <div className="flex items-center justify-center gap-2 mb-1">
+                                    <CheckCircle className="w-3 sm:w-4 h-3 sm:h-4" />
+                                    <span>✅ Reservado</span>
+                                  </div>
+                                  <div className="flex items-center justify-center gap-1">
+                                    <User className="w-3 h-3" />
+                                    <strong>{gift.reservedBy}</strong>
+                                  </div>
+                                  <div className="flex items-center justify-center gap-1">
+                                    <Phone className="w-3 h-3" />
+                                    <span>{gift.phone}</span>
+                                  </div>
+                                </div>
+                                {showReserved && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleCancelReservation(gift.id);
+                                    }}
+                                    className="w-full bg-red-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-red-600 transition-colors"
+                                  >
+                                    Cancelar Reserva
+                                  </button>
+                                )}
+                              </div>
+                            ) : (
+                              <button className="w-full bg-green-600 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium hover:bg-green-700 transition-all text-xs sm:text-sm">
+                                <Gift className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 inline" />
+                                Seleccionar Regalo
+                              </button>
+                            )}
                           </div>
                         </div>
 
-                        <div className="mt-4 pt-4 border-t border-green-200">
-                          {gift.reserved ? (
-                            <div className="space-y-3">
-                              <div className="bg-green-600 text-white px-4 py-3 rounded-xl text-center text-sm font-medium">
-                                <div className="flex items-center justify-center gap-2 mb-1">
-                                  <CheckCircle className="w-4 h-4" />
-                                  <span>✅ Reservado</span>
-                                </div>
-                                <div className="flex items-center justify-center gap-1">
-                                  <User className="w-3 h-3" />
-                                  <strong>{gift.reservedBy}</strong>
-                                </div>
-                                <div className="flex items-center justify-center gap-1">
-                                  <Phone className="w-3 h-3" />
-                                  <span>{gift.phone}</span>
-                                </div>
-                              </div>
-                              {showReserved && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleCancelReservation(gift.id);
-                                  }}
-                                  className="w-full bg-red-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-red-600 transition-colors"
-                                >
-                                  Cancelar Reserva
-                                </button>
-                              )}
-                            </div>
-                          ) : (
-                            <button className="w-full bg-green-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-green-700 transition-all">
-                              <Gift className="w-4 h-4 mr-2 inline" />
-                              Seleccionar Regalo
-                            </button>
-                          )}
-                        </div>
+                        {!gift.reserved && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        )}
                       </div>
-
-                      {!gift.reserved && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                      )}
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             ))
@@ -1162,26 +1513,32 @@ const initialGifts = [
 
         {/* Reservation Modal */}
         {selectedGift && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-amber-50 rounded-3xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-green-300">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Gift className="w-8 h-8 text-green-700" />
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-2 sm:p-4 z-50 backdrop-blur-sm">
+            <div className="bg-amber-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-sm sm:max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border-4 border-green-300">
+              <div className="text-center mb-4 sm:mb-6">
+                <div className="w-12 sm:w-16 h-12 sm:h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Gift className="w-6 sm:w-8 h-6 sm:h-8 text-green-700" />
                 </div>
-                <h3 className="text-3xl font-bold text-green-800">
+                <h3 className="text-xl sm:text-3xl font-bold text-green-800">
                   🦁 Reservar Regalo Safari
                 </h3>
               </div>
 
-              <div className="bg-green-100 p-6 rounded-2xl mb-6 border-2 border-green-300">
-                <h4 className="font-bold mb-3 text-xl text-green-800 flex items-center gap-2">
-                  <Star className="w-5 h-5 text-yellow-600" />
+              <div className="bg-green-100 p-3 sm:p-6 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 border-2 border-green-300">
+                <div className="mb-2 sm:mb-3">
+                  <span className={`inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 rounded-full text-xs font-medium border ${getCategoryColor(selectedGift.category)}`}>
+                    <Tag className="w-3 h-3" />
+                    {getCategoryEmoji(selectedGift.category)} {selectedGift.category}
+                  </span>
+                </div>
+                <h4 className="font-bold mb-2 sm:mb-3 text-lg sm:text-xl text-green-800 flex items-center gap-2">
+                  <Star className="w-4 sm:w-5 h-4 sm:h-5 text-yellow-600" />
                   {selectedGift.gift}
                 </h4>
-                <p className="text-sm text-green-700 mb-3 leading-relaxed">
+                <p className="text-xs sm:text-sm text-green-700 mb-2 sm:mb-3 leading-relaxed">
                   {selectedGift.description}
                 </p>
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <p className="text-xs font-medium text-green-700 flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-600 rounded-full"></div>
                     🏪 {selectedGift.store}
@@ -1193,10 +1550,10 @@ const initialGifts = [
                 </div>
               </div>
 
-              <div className="space-y-6 mb-8">
+              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
                 <div>
-                  <label className="block text-lg font-semibold text-green-800 mb-3 flex items-center gap-2">
-                    <User className="w-5 h-5 text-green-700" />
+                  <label className="block text-sm sm:text-lg font-semibold text-green-800 mb-2 sm:mb-3 flex items-center gap-2">
+                    <User className="w-4 sm:w-5 h-4 sm:h-5 text-green-700" />
                     Tu nombre completo:
                   </label>
                   <input
@@ -1204,14 +1561,14 @@ const initialGifts = [
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     placeholder="Ej: María González"
-                    className="w-full px-4 py-3 border-2 border-green-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-lg bg-white"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-green-300 rounded-lg sm:rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-sm sm:text-lg bg-white"
                     autoFocus
                   />
                 </div>
 
                 <div>
-                  <label className="block text-lg font-semibold text-green-800 mb-3 flex items-center gap-2">
-                    <Phone className="w-5 h-5 text-green-700" />
+                  <label className="block text-sm sm:text-lg font-semibold text-green-800 mb-2 sm:mb-3 flex items-center gap-2">
+                    <Phone className="w-4 sm:w-5 h-4 sm:h-5 text-green-700" />
                     Tu número de celular:
                   </label>
                   <input
@@ -1219,7 +1576,7 @@ const initialGifts = [
                     value={userPhone}
                     onChange={handlePhoneChange}
                     placeholder="Ej: 320 123 4567"
-                    className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-4 outline-none transition-all text-lg bg-white ${
+                    className={`w-full px-3 sm:px-4 py-2 sm:py-3 border-2 rounded-lg sm:rounded-xl focus:ring-4 outline-none transition-all text-sm sm:text-lg bg-white ${
                       phoneError
                         ? "border-red-400 focus:border-red-400 focus:ring-red-100"
                         : "border-green-300 focus:border-green-500 focus:ring-green-100"
@@ -1237,25 +1594,25 @@ const initialGifts = [
                     }}
                   />
                   {phoneError && (
-                    <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
-                      <X className="w-4 h-4" />
+                    <p className="text-red-500 text-xs sm:text-sm mt-2 flex items-center gap-2">
+                      <X className="w-3 sm:w-4 h-3 sm:h-4" />
                       {phoneError}
                     </p>
                   )}
-                  <p className="text-green-600 text-sm mt-2 flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
+                  <p className="text-green-600 text-xs sm:text-sm mt-2 flex items-center gap-2">
+                    <Phone className="w-3 sm:w-4 h-3 sm:h-4" />
                     Formato: número colombiano de 10 dígitos
                   </p>
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-2 sm:gap-4">
                 <button
                   onClick={() => {
                     setSelectedGift(null);
                     setPhoneError("");
                   }}
-                  className="flex-1 bg-amber-600 text-white text-lg py-4 rounded-xl font-medium hover:bg-amber-700 transition-all"
+                  className="flex-1 bg-amber-600 text-white text-sm sm:text-lg py-3 sm:py-4 rounded-lg sm:rounded-xl font-medium hover:bg-amber-700 transition-all"
                 >
                   Cancelar
                 </button>
@@ -1264,7 +1621,7 @@ const initialGifts = [
                   disabled={
                     !userName.trim() || !userPhone.trim() || !!phoneError
                   }
-                  className="flex-1 bg-green-600 text-white text-lg py-4 rounded-xl font-medium hover:bg-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="flex-1 bg-green-600 text-white text-sm sm:text-lg py-3 sm:py-4 rounded-lg sm:rounded-xl font-medium hover:bg-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   ✅ Confirmar
                 </button>
@@ -1274,12 +1631,12 @@ const initialGifts = [
         )}
 
         {/* Footer */}
-        <div className="mt-12 text-center">
-          <div className="text-green-600 text-sm">
+        <div className="mt-8 sm:mt-12 text-center">
+          <div className="text-green-600 text-xs sm:text-sm">
             <p className="flex items-center justify-center gap-2">
-              <Heart className="w-4 h-4 text-yellow-600" />
+              <Heart className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-600" />
               🦁 Hecho con amor safari para el Baby Shower de Maximiliano 🌿
-              <Heart className="w-4 h-4 text-yellow-600" />
+              <Heart className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-600" />
             </p>
           </div>
         </div>
