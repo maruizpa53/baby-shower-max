@@ -1109,7 +1109,7 @@ export default function BabyShowerGiftSelector() {
                 <BarChart3 className="w-3 sm:w-4 h-3 sm:h-4" />
                 📊 <span className="hidden sm:inline">Resumen</span>
               </button>
-              <button
+{/*               <button
                 onClick={resetAllReservations}
                 className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-red-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-red-700 transition-all shadow-lg text-xs sm:text-sm"
                 title="Reiniciar todas las reservas"
@@ -1124,7 +1124,7 @@ export default function BabyShowerGiftSelector() {
               >
                 <RefreshCw className="w-3 sm:w-4 h-3 sm:h-4" />
                 🔧 <span className="hidden sm:inline">Reinicializar</span><span className="sm:hidden">Fix</span>
-              </button>
+              </button> */}
             </div>
           </div>
 
