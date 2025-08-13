@@ -1,0 +1,47 @@
+{
+  "name": "baby-shower-gift-selector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Selector inteligente de regalos para baby shower con pañales por etapa",
+  "keywords": [
+    "baby shower",
+    "regalos",
+    "bebé",
+    "pañales",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
+  "author": "Baby Shower Team",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "critters": "^0.0.23",
+    "lucide-react": "^0.263.1",
+    "next": "14.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.51.0",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
